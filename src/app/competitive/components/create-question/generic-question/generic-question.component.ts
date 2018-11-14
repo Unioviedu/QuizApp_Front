@@ -39,4 +39,41 @@ export class GenericQuestionComponent implements OnInit {
     return this.questionForm.controls;
   }
 
+  get title() {
+    return this.q.title.value;
+  }
+
+  get statement() {
+    let blocks = [];
+  
+    blocks.push(this.createTextSection(this.q.statement.value));
+
+    if (this.q.codeBlock.value) {
+      blocks.push( this.createCodeSection(this.q.codeBlock.value, this.q.language.value) );
+    }
+
+    return {
+      blocks: blocks
+    }
+  }
+
+  createTextSection(text) {
+    let textSection = {
+      type: 'textSection',
+      content: text
+    }
+
+    return textSection;
+  }
+
+  createCodeSection(text, language) {
+    let codeSection = {
+      type: 'codeSection',
+      content: text,
+      programmingLanguage: language
+    }
+
+    return codeSection;
+  }
+
 }

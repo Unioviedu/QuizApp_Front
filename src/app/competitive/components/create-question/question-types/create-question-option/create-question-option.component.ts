@@ -110,7 +110,6 @@ export class CreateQuestionOptionComponent implements OnInit {
       return;
     }
 
-    const q = questionForm.controls;
     const o = optionsForm.controls;
 
     const optionsObj = [];
@@ -125,15 +124,11 @@ export class CreateQuestionOptionComponent implements OnInit {
         optionsObj.push(optionObj);
       }
     );
-    
-    const withCode = this.genericQuestion.toggleCode;
 
     const newQuestion = {
-      'title': q.title.value,
-      'statement': q.statement.value,
+      'title': this.genericQuestion.title,
+      'statement': this.genericQuestion.statement,
       'type': 'option',
-      'codeBlock': withCode ? q.codeBlock.value : null,
-      'programmingLanguage': withCode ? q.language.value : null,
       'options': optionsObj
     };
 

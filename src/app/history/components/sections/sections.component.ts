@@ -19,7 +19,7 @@ export class SectionsComponent implements OnInit {
   loadSections() {
     this.sectionsService.getSectionsList().subscribe(
       data => {
-        this.sections = data;
+        this.sections = data.sort( (a, b) => a.orden - b.orden );
       }
     );
   }
