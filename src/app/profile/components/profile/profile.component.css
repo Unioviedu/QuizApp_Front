@@ -1,0 +1,21 @@
+@media screen and (max-width: 991px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .card-columns {
+        column-count: 2;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h2{
+        font-size:54px;
+    }
+
+    h1 {
+        font-size: 65px;
+    }
+}

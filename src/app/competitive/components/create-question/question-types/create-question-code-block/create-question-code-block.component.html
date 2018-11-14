@@ -1,0 +1,70 @@
+<div class="row">
+
+    <div class="col-sm-6">
+        <app-generic-question></app-generic-question>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group" style="width: 100%">
+
+            <form [formGroup]="optionsForm">
+
+                <div class="form-group" style="width: 100%;">
+                    <label for="exampleInputEmail1">Options</label>
+                    <div class="input-group mb-3" *ngFor="let option of options;let i = index">
+                        <input (input)="onOptionChange($event.target.value, option)" type="text" formControlName="{{option.id}}"
+                            class="form-control" [ngClass]="getNgClass(option.id)">
+                        <div class="input-group-append">
+                            <button class="btn btn-warning" (click)="convertInCorrect(option)" type="button"><span
+                                    class="{{option.icon}}"></span></button>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="removeOption(option)" type="button"><span
+                                    class="fa fa-close"></span></button>
+                        </div>
+                        <div *ngIf="getIfOption(option.id, 0)" class="invalid-feedback">
+                            <div *ngIf="getIfOption(option.id, 1)">La opcion no puede estar vacia</div>
+                        </div>
+                    </div>
+                    <div *ngIf="isLastOption" class="alert alert-danger" role="alert">
+                        <button type="button" class="close" (click)="closeAlert()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        Tiene que haber por lo menos dos opciones.
+                    </div>
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button (click)="addOption()" type="button" class="btn btn-success btn-xs">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="width: 100%;">
+                    <label for="exampleInputEmail1">Correct Options</label>
+                    <div class="input-group mb-3" *ngFor="let option of correctOptions;let i = index">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{{i+1}}</span>
+                        </div>
+                        <input type="text" formControlName="correct{{option.id}}" class="form-control" readonly=true>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="removeCorrectOption(option)" type="button"><span
+                                    class="fa fa-close"></span></button>
+                        </div>
+                    </div>
+                    <div *ngIf="isLastOptionCorrect" class="alert alert-danger" role="alert">
+                        <button type="button" class="close" (click)="closeAlert()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        Tiene que haber por lo menos una opcion correcta.
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<hr>
+<button (click)="save()" type="submit" class="btn btn-primary">Submit</button>

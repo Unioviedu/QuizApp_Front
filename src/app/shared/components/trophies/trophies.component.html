@@ -1,0 +1,18 @@
+<div class="card text-center text-white bg-warning mb-3" style="width: 100%">
+  <div class="card-header">
+      <h2 class="display-5">Trophies</h2>
+  </div>
+  <div class="card-body">
+      <ul class="list-group text-dark text-left" style="margin-bottom: 15px">
+          <li *ngFor="let trophy of trophies" class="list-group-item list-group-item-light">
+              <div class="row">
+                  <img class="img-responsive" [src]="getIcon(trophy)" width="60" height="60">
+                  <div class="col">
+                      <h4>{{trophy.challange.title}}</h4>
+                      {{trophy.challange.description}}
+                  </div>
+              </div>
+          </li>
+      </ul>
+  </div>
+</div>

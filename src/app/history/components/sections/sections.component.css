@@ -1,0 +1,5 @@
+@media only screen and (max-width:991px) and (min-width:574px) {
+    .card-columns {
+        column-count: 2;
+    }
+}

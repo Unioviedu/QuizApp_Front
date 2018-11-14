@@ -1,0 +1,40 @@
+<form [formGroup]="questionForm">
+
+  <div class="form-group" style="width: 100%;">
+      <label>Titulo</label>
+      <input formControlName="title" type="text" class="form-control" [ngClass]="{ 'is-invalid': (q.title.touched || submitted ) && q.title.errors }">
+      <div *ngIf="(q.title.touched || submitted ) && q.title.errors" class="invalid-feedback">
+          <div *ngIf="q.title.errors.required">El titulo no puede estar vacio</div>
+      </div>
+  </div>
+
+  <div class="form-group" style="width: 100%">
+      <label for="exampleInputPassword1">Statement</label>
+      <textarea formControlName="statement" rows="8" class="form-control" [ngClass]="{ 'is-invalid': (q.statement.touched || submitted ) && q.statement.errors }"></textarea>
+      <div *ngIf="(q.statement.touched || submitted ) && q.statement.errors" class="invalid-feedback">
+          <div *ngIf="q.statement.errors.required">El enunciado no puede estar vacio</div>
+      </div>
+  </div>
+
+  <div class="form-group" style="width: 100%">
+      <label style="margin-right: 4px">Código</label>
+      <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" (click)="toggleCodeBlock()" data-target="#collapseCode"
+          aria-expanded="false" aria-controls="collapseExample">
+          {{nameToggleCode}}
+      </button>
+      <div class="collapse" id="collapseCode" style="margin-top: 10px">
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text">Lenguaje</label>
+              </div>
+              <select class="custom-select" id="inputGroupSelect01" formControlName="language">
+                <option value="javascript" selected>Javascript</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+              </select>
+            </div>
+          <textarea formControlName="codeBlock" rows="8" class="form-control"></textarea>
+      </div>
+  </div>
+
+</form>

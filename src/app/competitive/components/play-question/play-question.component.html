@@ -1,0 +1,86 @@
+<div class="row h-100">
+    <div class="col-sm-12">
+        <div class="center-block">
+
+
+            <div *ngIf="isForVote" class="alert alert-warning" role="alert">
+                Esta es una pregunta que todavia no ha sido aceptada, no contara para tu puntuación!
+            </div>
+
+            <div [ngSwitch]="alertType" *ngIf="alertType" class="alert-response" style="height: 50%">
+                <div *ngSwitchCase="'correct'" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Good</h4>
+                    <p>The answer is correct.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="'incorrect'" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Oh...</h4>
+                    <p>The answer is incorrect.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="question">
+                <ng-template app-question></ng-template>
+                <hr>
+                <button *ngIf="exitButton" [routerLink]="['/competitive']" type="button" class="btn btn-danger btn-lg btn-block">Exit</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div #modalVote class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">¿Crees que esta es una buena pregunta?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <p>Vota aqui abajo.</p>
+            </div>
+            <div class="modal-footer">
+                <button (click)="voteQuestion(true)" type="button" class="btn btn-success" data-dismiss="modal">Si <span class="fas fa-thumbs-up"></span></button>
+                <button (click)="voteQuestion(false)" type="button" class="btn btn-danger" data-dismiss="modal">No <span class="fas fa-thumbs-down"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #modalResponse class="modal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+
+                <div *ngIf="newInfo.newRank" class="alert alert-success">
+                    <h6>New RankLevel:</h6> {{newInfo.newRank.name}}
+                </div>
+
+                <div *ngIf="newInfo.newExp >= 0" class="alert alert-success">
+                    <h6>Correct - Bonification:</h6> {{newInfo.newExp}} exp
+                </div>
+
+                <div *ngIf="newInfo.newExp < 0" class="alert alert-danger">
+                    <h6>Incorrect - Bonification:</h6> {{newInfo.newExp}} exp
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

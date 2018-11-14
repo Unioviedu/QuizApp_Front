@@ -1,0 +1,14 @@
+<div class="card border-primary mb-3" [ngStyle]="{'opacity':opacity}">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h5 class="card-title">
+                    {{level.name}}
+                    <span [class]="classBadge">{{msgBadge}}</span>
+                </h5>
+                <p class="card-text">{{level.experience}} exp</p>
+            </div>
+            <button type="button" class="btn btn-primary" style="width: 25%" (click)="playLevel()" [disabled]="disabledButton">Play</button>
+        </div>
+    </div>
+</div>

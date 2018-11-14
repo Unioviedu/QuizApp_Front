@@ -1,0 +1,88 @@
+<div class="row h-100">
+    <div class="col-sm-12">
+        <div class="center-block">
+
+            <div [ngSwitch]="alertType" *ngIf="alertType" class="alerts" style="height: 50%">
+                <div *ngSwitchCase="'correct'" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Good</h4>
+                    <p>The answer is correct.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+
+                <div *ngSwitchCase="'incorrect'" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Oh...</h4>
+                    <p>The answer is incorrect.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{'width':progressCorrect}" aria-valuemax="100">{{correctQuestion}}</div>
+                <div class="progress-bar bg-danger" role="progressbar" [ngStyle]="{'width':progressIncorrect}" aria-valuemax="100">{{incorrectQuestion}}</div>
+            </div>
+
+            <div class="question">
+                <div class="mx-auto" style="width: 90%">
+                    <ng-template app-question></ng-template>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div #myModal class="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
+            </div>
+            <div class="modal-body">
+
+                <div *ngIf="newInfo.newRank" class="alert alert-success">
+                    <h6>New RankLevel:</h6> {{newInfo.newRank.name}}
+                </div>
+
+                <div *ngIf="newInfo.levelsUnlock.length > 0" class="alert alert-warning">
+                    <h6>Levels unlocked</h6>
+                    <ul>
+                        <li *ngFor="let level of newInfo.levelsUnlock">{{level}}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="newInfo.sectionsUnlock.length > 0" class="alert alert-warning">
+                    <h6>Sections unlocked</h6>
+                    <ul>
+                        <li *ngFor="let section of newInfo.sectionsUnlock">{{section}}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="newInfo.trophiesComplete.length > 0" class="alert alert-secondary">
+                    <h6>Trophies complete</h6>
+                    <ul>
+                        <li *ngFor="let result of newInfo.trophiesComplete">{{result.challange.title}}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="newInfo.challangesComplete.length > 0" class="alert alert-secondary">
+                    <h6>Challanges complete</h6>
+                    <ul>
+                        <li *ngFor="let result of newInfo.challangesComplete">{{result.challange.description}}</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-success">
+                    <h6>Bonification:</h6> {{newInfo.newExp}} exp
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)='backSections()'>Volver a la sección</button>
+            </div>
+        </div>
+    </div>
+</div>

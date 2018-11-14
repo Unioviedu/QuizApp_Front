@@ -1,0 +1,16 @@
+<div *ngIf="data">
+    <div *ngFor="let block of data.blocks">
+        <div [ngSwitch]="block.type" class="alert-response" style="height: 50%">
+            <div *ngSwitchCase="'header'">
+                <div [ngSwitch]="block.level">
+                    <h1 *ngSwitchCase="1">{{block.content}}</h1>
+                    <h2 *ngSwitchCase="2">{{block.content}}</h2>
+                    <h3 *ngSwitchCase="3">{{block.content}}</h3>
+                </div>
+            </div>
+            <p *ngSwitchCase="'textSection'" class="card-text">{{block.content}}</p>
+            <textarea *ngSwitchCase="'codeSection'" highlight-js [lang]="block.programmingLanguage" [ngModel]="block.content"></textarea>
+            <hr *ngSwitchCase="'separator'">
+        </div>
+    </div>
+</div>

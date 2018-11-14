@@ -1,0 +1,15 @@
+<app-navbar></app-navbar>
+
+<div class="container main-container">
+
+    <div *ngIf="alertException" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Oh, no!</h4>
+        <p>Ha ocurrido un error fuera de nuestro alcance, cuando seas programador podremos explicarte el porque. Hasta entonces, espera unos minutos a ver si se arregla solo.</p>
+        <button type="button" class="close" (click)="closeException()" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <router-outlet></router-outlet>
+
+
+</div>

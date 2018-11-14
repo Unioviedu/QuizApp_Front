@@ -1,0 +1,19 @@
+<div class="card" [ngStyle]="{'opacity':opacity}">
+    <!-- <img class="card-img-top img-fluid" [src]="heroe.img" [alt]="heroe.nombre"> -->
+    <div class="card-body">
+
+        <h4 class="card-title">{{section.title}}
+            <span [class]="classBadge">{{msgBadge}}</span>
+        </h4>
+
+        <p class="card-text">{{section.description}}</p>
+        <p class="card-text">
+            <small class="text-muted">Null</small>
+        </p>
+
+        <button (click)="verSection()" type="button" class="btn btn-primary btn-block" [disabled]="disabledButton">
+      Show levels
+    </button>
+
+    </div>
+</div>

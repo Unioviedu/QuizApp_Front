@@ -1,0 +1,20 @@
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-transparent">
+    <div class="col-md-6 p-lg-2 mx-auto my-1">
+        <img src="assets/descarga.jpg" class="rounded-circle" alt="Cinque Terre" width="152" height="118">
+        <h1 class="display-4 font-weight-normal">@{{user.username}}</h1>
+        <hr>
+        <p class="lead font-weight-normal"><strong>Name: </strong>{{user.username}}</p>
+        <p class="lead font-weight-normal"><strong>Mail: </strong>{{user.mail}}</p>
+        <a class="btn btn-danger" [routerLink]="['/login']" style="margin: 5px">Close session</a>
+    </div>
+</div>
+
+<div class="card-columns">
+
+    <app-rank-level [levelRank]="levelRank"></app-rank-level>
+
+    <app-trophies [trophies]="trophies"></app-trophies>
+
+    <app-custom-questions> </app-custom-questions>
+
+</div>

@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{data.title}}</h5>
+                <app-formatted-text [data]="data.statement"></app-formatted-text>
+            </div>
+            <div class="card-footer text-muted text-center">
+                Respuestas correctas {{cont}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li [class]="options[i].classOption" (click)="response(i)" *ngFor="let option of options; let i = index;">{{getOption(i)}}</li>
+        </ul>
+    </div>
+</div>
+
+<button type="button" class="btn btn-success btn-lg btn-block" (click)="qualify()">{{nameButton}}</button>
