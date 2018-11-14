@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
 
   passFormat(c: AbstractControl): { passFormat: boolean } {
     let length = c.get('password').value.length;
-    if (length < 4 || length > 6)
+    if (length < 4)
       return { passFormat: true };
   }
 
