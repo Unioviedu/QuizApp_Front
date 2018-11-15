@@ -20,8 +20,8 @@ export class LevelComponent implements AfterViewInit, OnInit {
   alertType: string = null;
 
   questions: number;
-  correctQuestion = 0;
-  incorrectQuestion = 0;
+  correctQuestion = null;
+  incorrectQuestion = null;
   progressCorrect = '0%';
   progressIncorrect = '0%';
 
@@ -64,17 +64,31 @@ export class LevelComponent implements AfterViewInit, OnInit {
 
   responseQuestion(isCorrect: boolean) {
     if (isCorrect) {
+      if (!this.correctQuestion) {
+        this.correctQuestion = 0;
+      }
+      
       this.correctQuestion++;
       this.alertType = 'correct';
       const percentajeCorrect = (this.correctQuestion / this.questions) * 100;
       this.progressCorrect = percentajeCorrect.toString() + '%';
     } else {
+      if (!this.incorrectQuestion) {
+        this.incorrectQuestion = 0;
+      }
+
       this.incorrectQuestion++;
       this.alertType = 'incorrect';
 
       const percentajeIncorrect = (this.incorrectQuestion / this.questions) * 100;
       this.progressIncorrect = percentajeIncorrect.toString() + '%';
     }
+  
+    const me = this;
+
+    setTimeout(function() { 
+      me.alertType = null; 
+    }, 1500);
   }
 
   nextQuestion(isLast: boolean) {
