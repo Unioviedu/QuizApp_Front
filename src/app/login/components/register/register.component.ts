@@ -28,9 +28,9 @@ export class RegisterComponent implements OnInit {
       mail: ['', [Validators.required, Validators.email]],
 
       passwords: this.formBuilder.group({
-        password: ['', []],
+        password: ['', [Validators.required, Validators.minLength(6)]],
         password2: ['', []],
-      }, { validator: [this.passwordConfirmed, this.passFormat] })
+      }, { validator: [this.passwordConfirmed] })
 
     });
   }
@@ -59,14 +59,12 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  passFormat(c: AbstractControl): { passFormat: boolean } {
-    let length = c.get('password').value.length;
-    if (length < 4)
-      return { passFormat: true };
-  }
-
   get f() {
     return this.registerForm.controls;
+  }
+
+  get p() {
+    return this.f.passwords.get('password');
   }
 
   register() {

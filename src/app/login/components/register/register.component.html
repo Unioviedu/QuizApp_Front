@@ -16,11 +16,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">@</span>
           </div>
-          <input #username (blur)="checkUniqueUsername(username.value)" (keyup)="checkUniqueUsername(username.value)" type="text" formControlName="username" class="form-control" placeholder="Username" aria-label="Username"
+          <input #username (blur)="checkUniqueUsername(username.value)" (keyup)="checkUniqueUsername(username.value)"
+            type="text" formControlName="username" class="form-control" placeholder="Username" aria-label="Username"
             aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': (f.username.touched || submitted ) && f.username.errors }">
           <div *ngIf="(f.username.touched || submitted ) && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">El nombre de usuario es obligatorio.</div>
-            <div *ngIf="f.username.errors.minlength">Mínimo 4 caracteres</div>
+            <div *ngIf="f.username.errors.required || f.username.errors.minlength">El nombre de usuario es obligatorio.</div>
             <div *ngIf="f.username.errors.maxlength">Máximo 16 caracteres</div>
             <div *ngIf="f.username.errors.repeat">Nombre de usuario repetido</div>
           </div>
@@ -42,16 +42,16 @@
           <label for="exampleInputPassword1">Password</label>
 
           <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-            [ngClass]="{ 'is-invalid': (f.passwords.touched || submitted ) && f.passwords.errors }">
+            [ngClass]="{ 'is-invalid': (p.touched || submitted ) && p.errors }">
+          <div *ngIf="(p.touched || submitted ) && p.errors" class="invalid-feedback">
+            <div *ngIf="p.errors.format">La contraseña debe tener mínimo 6 caracteres</div>
+          </div>
 
           <input type="password" formControlName="password2" class="form-control" id="exampleInputPassword2"
             placeholder="Repeat Password" [ngClass]="{ 'is-invalid': (f.passwords.touched || submitted ) && f.passwords.errors }">
 
           <div *ngIf="(f.passwords.touched || submitted ) && f.passwords.errors" class="invalid-feedback">
-            <div *ngIf="f.passwords.errors.passFormat; else second">Password format</div>
-            <ng-template #second>
-              <div *ngIf="f.passwords.errors.mismatch">Password coincidir</div>
-            </ng-template>
+              <div *ngIf="f.passwords.errors.mismatch">Las contraseñas deben ser iguales</div>
           </div>
 
         </form>
