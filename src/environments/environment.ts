@@ -9,8 +9,8 @@ export const environment = {
 
 /*export const environment = {
   production: false,
-  baseUrl: 'http://192.168.1.111:8080'
-};*/
+  baseUrl: 'http://localhost:8080'
+};
 
 /*
  * In development mode, for easier debugging, you can ignore zone related error

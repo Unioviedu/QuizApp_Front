@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit, 
 import { QuestionDirective } from './directives/question.directive';
 import { SectionsService } from '../../services/sections.service';
 import { QuestionDuo } from '../../../question/model/question-duo';
-import { Router } from '../../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '../../../../../node_modules/@angular/router';
 import { InfoUser } from '../../../shared/model/info-user.model';
+import { Level } from '../../model/level.model';
 
 declare var jQuery: any;
 
@@ -15,6 +16,9 @@ declare var jQuery: any;
 export class LevelComponent implements AfterViewInit, OnInit {
   @ViewChild('myModal') myModal;
   @ViewChild(QuestionDirective) dQuestion: QuestionDirective;
+  codSectionLevel: string;
+  level: Level;
+
   index = 0;
   qDuos: QuestionDuo[];
   alertType: string = null;
@@ -30,21 +34,32 @@ export class LevelComponent implements AfterViewInit, OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private cdr: ChangeDetectorRef,
     private sectionService: SectionsService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+
+      this.activatedRoute.params.subscribe(params => {
+        this.codSectionLevel = params['cod'];
+      });
+
   }
 
   ngOnInit() {
-    this.loadLevel();
   }
 
   ngAfterViewInit() {
-    this.loadQuestion();
+    this.loadLevel();
     this.cdr.detectChanges();
   }
 
   loadLevel() {
-    this.qDuos = this.sectionService.getQuestionsDuo();
-    this.questions = this.qDuos.length;
+    this.sectionService.getLevel(this.codSectionLevel).subscribe(
+      level => {
+        this.level = level;
+        this.qDuos = this.sectionService.getQuestionsDuo(level.questions);
+        this.loadQuestion();
+        this.questions = this.qDuos.length;
+      }
+    );
   }
 
   loadQuestion() {
@@ -93,7 +108,16 @@ export class LevelComponent implements AfterViewInit, OnInit {
 
   nextQuestion(isLast: boolean) {
     if (isLast) {
-      this.sectionService.responseLevel(this.correctQuestion, this.incorrectQuestion)
+      const resultLevel = {
+        'idLevel': this.level.id,
+        'idSection': this.level.idSection,
+        'numCorrectQuestion': this.correctQuestion,
+        'numIncorrectQuestion': this.incorrectQuestion,
+        'nextLevels': this.level.nextLevels,
+        'expBase': this.level.experience
+      };
+
+      this.sectionService.responseLevel(resultLevel)
         .subscribe((data) => {
           this.newInfo = data;
           jQuery(this.myModal.nativeElement).modal('show');
@@ -107,7 +131,7 @@ export class LevelComponent implements AfterViewInit, OnInit {
   }
 
   backSections() {
-    const codSection = this.sectionService.getCurrentLevel().codSection;
+    const codSection = this.codSectionLevel.split("_")[0];
     this.router.navigate(['/section', codSection]);
     jQuery(this.myModal.nativeElement).modal('hide');
   }

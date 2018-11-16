@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Section } from '../model/section.model';
@@ -29,26 +29,21 @@ export class SectionsService {
     return this.http.get<Section>(`${this.url}/section/${cod}?username=${this.getCurrentUser()}`);
   }
 
-  responseLevel(correctQuestion: number, incorrectQuestion: number) {
-    const resultLevel = {
-      'username': this.getCurrentUser(),
-      'idLevel': this.getCurrentLevel().id,
-      'idSection': this.getCurrentLevel().idSection,
-      'numCorrectQuestion': correctQuestion,
-      'numIncorrectQuestion': incorrectQuestion,
-      'nextLevels': this.getCurrentLevel().nextLevels,
-      'expBase': this.getCurrentLevel().experience
-    };
-
+  responseLevel(resultLevel) {
+    resultLevel.username = this.getCurrentUser();
     return this.http.post<any>(`${this.url}/responseLevel`, resultLevel);
   }
 
-  getQuestionsDuo() {
+  getLevel(codSectionLevel) {
+    return this.http.get<Level>(`${this.url}/level/${codSectionLevel}?username=${this.getCurrentUser()}`);
+  }
+
+  getQuestionsDuo(questions) {
+    
     const qDuos: QuestionDuo[] = [];
 
-    let cont = 0;
-    for (const question of this.currentLevel.questions.sort((a, b) => a.title.localeCompare(b.title))) {
-      question.isLast = cont === this.currentLevel.questions.length - 1;
+    questions.sort( (q1, q2) => q1.orden - q2.orden).forEach( (question, index) => {
+      question.isLast = index === questions.length - 1;
       let qDuo: QuestionDuo;
       if (question.type === 'option') {
         qDuo = new QuestionDuo(QuestionOptionsComponent, question);
@@ -56,8 +51,7 @@ export class SectionsService {
         qDuo = new QuestionDuo(QuestionCodeBlockComponent, question);
       }
       qDuos.push(qDuo);
-      cont++;
-    }
+    });
 
     return qDuos;
   }

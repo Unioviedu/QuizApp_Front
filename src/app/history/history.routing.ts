@@ -8,7 +8,7 @@ import { LevelGuard } from './services/level.guard';
 const appRoutes: Routes = [
     { path: 'sections', component: SectionsComponent, canActivate: [AuthGuard]  },
     { path: 'section/:cod', component: SectionComponent, canActivate: [AuthGuard] },
-    { path: 'level/:cod', component: LevelComponent, canActivate: [LevelGuard] }
+    { path: 'level/:cod', component: LevelComponent }
 ];
 
 export const routing = RouterModule.forChild(appRoutes);

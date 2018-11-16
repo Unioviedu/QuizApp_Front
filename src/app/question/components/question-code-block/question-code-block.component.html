@@ -1,29 +1,39 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">{{data.title}}</h5>
-    <app-formatted-text [data]="data.statement"></app-formatted-text>
-  </div>
-</div>
+<div class="row">
 
-<div class="card">
-  <div class="card-body">
+  <div class="col-md-6">
 
-    <h6 class="card-title">Response</h6>
-    <div class="row">
-      <div class="option" *ngFor="let block of blocksResponse; let i = index">
-          <button type="button" class="btn btn-secondary" (click)="removeBlock(block.cod)">{{block.value}}</button>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{data.title}}</h5>
+        <app-formatted-text [data]="data.statement"></app-formatted-text>
       </div>
     </div>
 
-    <hr>
+  </div>
 
-    <h6 class="card-title">Options</h6>
-    <div class="row">
-      <div class="option" *ngFor="let block of blocksOptions; let i = index">
-        <button type="button" (click)="addBlock(block.cod)" class="btn btn-secondary">{{block.value}}</button>
+  <div class="col-md-6">
+
+    <div class="card">
+      <div class="card-body">
+
+        <h6 class="card-title">Response</h6>
+        <div class="row">
+          <div class="response" *ngFor="let block of blocksResponse; let i = index">
+            <button type="button" class="btn btn-secondary" (click)="removeBlock(block.cod)">{{block.value}}</button>
+          </div>
+        </div>
+
+        <hr>
+
+        <h6 class="card-title">Options</h6>
+        <div class="row">
+          <div class="option" *ngFor="let block of blocksOptions; let i = index">
+            <button type="button" (click)="addBlock(block.cod)" class="btn btn-secondary">{{block.value}}</button>
+          </div>
+        </div>
       </div>
     </div>
+    
   </div>
-</div>
 
-<button type="button" class="btn btn-success btn-lg btn-block" (click)="qualify()">{{nameButton}}</button>
+  <button type="button" class="btn btn-success btn-lg btn-block" (click)="qualify()">{{nameButton}}</button>

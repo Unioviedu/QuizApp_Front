@@ -1,8 +1,21 @@
-.card {
-    margin-bottom: 2%;
-    margin-top: 2%;
-}
-
 .option {
     margin: 5px;
+}
+
+.response {
+    margin-left: 2px;
+    display:block;
+}
+
+.btn-secondary {
+    padding: 0px;
+}
+
+.card {
+    margin-bottom: 5%;
+}
+
+.row {
+    margin-top: 5%;
+    margin-bottom: 5%;
 }

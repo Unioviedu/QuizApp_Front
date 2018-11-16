@@ -35,8 +35,8 @@ export class SectionComponent implements OnInit {
       .subscribe(
       data => {
         this.section = data;
-        this.levelsMain = data.levels.filter(level => level.main).sort((a, b) => a.name.localeCompare(b.name));
-        this.levelsOptional = data.levels.filter(level => !level.main).sort((a, b) => a.name.localeCompare(b.name));
+        this.levelsMain = data.levels.filter(level => level.main).sort((a, b) => a.orden - b.orden);
+        this.levelsOptional = data.levels.filter(level => !level.main).sort((a, b) => a.orden - b.orden);
       }, 
       error => {
         this.router.navigate( ['/sections'] );
