@@ -6,6 +6,7 @@ import { Level } from '../model/level.model';
 import { QuestionDuo } from '../../question/model/question-duo';
 import { QuestionOptionsComponent } from '../../question/components/question-options/question-options.component';
 import { QuestionCodeBlockComponent } from '../../question/components/question-code-block/question-code-block.component';
+import { QuestionCompleteCodeComponent } from '../../question/components/question-complete-code/question-complete-code.component';
 
 
 
@@ -49,6 +50,8 @@ export class SectionsService {
         qDuo = new QuestionDuo(QuestionOptionsComponent, question);
       } else if (question.type === 'codeBlock') {
         qDuo = new QuestionDuo(QuestionCodeBlockComponent, question);
+      } else if (question.type == 'completeCode') {
+        qDuo = new QuestionDuo(QuestionCompleteCodeComponent, question);
       }
       qDuos.push(qDuo);
     });

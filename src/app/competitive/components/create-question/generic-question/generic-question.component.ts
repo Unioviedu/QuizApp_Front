@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -7,13 +7,16 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./generic-question.component.css']
 })
 export class GenericQuestionComponent implements OnInit {
+  @Output() onChangeCodeBlock: EventEmitter<string>;
+
   submitted: boolean;
   questionForm: any;
 
   nameToggleCode = "Mostrar";
-  toggleCode:boolean;
+  toggleCode: boolean;
 
   constructor(private formBuilder: FormBuilder) {
+    this.onChangeCodeBlock = new EventEmitter();
     this.questionForm = this.formBuilder.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
       statement: ['', [Validators.required]],
@@ -23,6 +26,14 @@ export class GenericQuestionComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.onChanges();
+  }
+
+  onChanges() {
+    this.questionForm.get('codeBlock').valueChanges.subscribe(value => {
+      this.onChangeCodeBlock.emit(value);
+    });
   }
 
   toggleCodeBlock() {
@@ -45,11 +56,11 @@ export class GenericQuestionComponent implements OnInit {
 
   get statement() {
     let blocks = [];
-  
+
     blocks.push(this.createTextSection(this.q.statement.value));
 
     if (this.q.codeBlock.value) {
-      blocks.push( this.createCodeSection(this.q.codeBlock.value, this.q.language.value) );
+      blocks.push(this.createCodeSection(this.q.codeBlock.value, this.q.language.value));
     }
 
     return {

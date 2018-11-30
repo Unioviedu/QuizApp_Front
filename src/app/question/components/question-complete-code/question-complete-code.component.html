@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{data.title}}</h5>
+        <app-formatted-text [data]="data.statement"></app-formatted-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card" *ngFor="let line of data.linesCode; let i = index">
+
+      <div class="card-body">
+        <h6 class="card-title">{{line.name}}</h6>
+        <textarea class="form-control" [(ngModel)]="response[i]"></textarea>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<button type="button" class="btn btn-success btn-lg btn-block" (click)="qualify()">{{nameButton}}</button>

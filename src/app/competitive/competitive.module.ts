@@ -13,6 +13,7 @@ import { PlayQuestionComponent } from './components/play-question/play-question.
 import { QuestionDirective } from './components/play-question/directives/question.directive';
 import { QuestionModule } from '../question/question.module';
 import { GenericQuestionComponent } from './components/create-question/generic-question/generic-question.component';
+import { CreateQuestionCompleteCodeComponent } from './components/create-question/question-types/create-question-complete-code/create-question-complete-code.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { GenericQuestionComponent } from './components/create-question/generic-q
     CreateQuestionCodeBlockComponent,
     PlayQuestionComponent,
     QuestionDirective,
-    GenericQuestionComponent
+    GenericQuestionComponent,
+    CreateQuestionCompleteCodeComponent
   ]
 })
 export class CompetitiveModule { }

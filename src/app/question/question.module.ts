@@ -5,6 +5,7 @@ import { QuestionCodeBlockComponent } from './components/question-code-block/que
 import { HighlightJsModule } from 'ngx-highlight-js';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { QuestionCompleteCodeComponent } from './components/question-complete-code/question-complete-code.component';
 
 @NgModule({
   imports: [
@@ -13,8 +14,17 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     SharedModule
   ],
-  declarations: [QuestionOptionsComponent, QuestionCodeBlockComponent],
-  entryComponents: [QuestionOptionsComponent, QuestionCodeBlockComponent],
-  exports: [QuestionOptionsComponent, QuestionCodeBlockComponent]
+  declarations: [
+    QuestionOptionsComponent, 
+    QuestionCodeBlockComponent, 
+    QuestionCompleteCodeComponent],
+  entryComponents: [
+    QuestionOptionsComponent, 
+    QuestionCodeBlockComponent, 
+    QuestionCompleteCodeComponent],
+  exports: [
+    QuestionOptionsComponent, 
+    QuestionCodeBlockComponent,
+    QuestionCompleteCodeComponent]
 })
 export class QuestionModule { }

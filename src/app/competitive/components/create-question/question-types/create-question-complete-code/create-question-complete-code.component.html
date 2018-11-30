@@ -1,0 +1,43 @@
+<div class="row">
+
+  <div class="col-sm-6">
+    <app-generic-question (onChangeCodeBlock)="checkNewLineCode($event)"></app-generic-question>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group" style="width: 100%">
+
+      <form [formGroup]="optionsForm">
+
+        <div class="form-group" style="width: 100%;">
+          <label for="exampleInputEmail1">Respuestas</label>
+
+          <div class="card" style="margin-bottom: 5px;" *ngFor="let option of options">
+
+            <div class="card-body">
+              <h6 class="card-title">{{option.name}}</h6>
+
+              <div *ngFor="let response of option.responses">
+                <textarea class="form-control" formControlName="{{response}}" [ngClass]="getNgClass(response)" style="margin-bottom: 3px;"></textarea>
+                <div *ngIf="getIfResponse(response, 0)" class="invalid-feedback">
+                  <div *ngIf="getIfResponse(response, 1)">La respuesta no puede estar vacia</div>
+                </div>
+              </div>
+              
+              <hr>
+              <button class="btn btn-success" (click)="addResponse(option.id)" type="button" style="margin-right: 5px;">Añadir</button>
+              <button class="btn btn-danger" (click)="removeResponse(option.id)" type="button">Eliminar</button>
+            </div>
+
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+<hr>
+<button (click)="save()" type="submit" class="btn btn-primary">Submit</button>

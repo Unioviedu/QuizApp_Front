@@ -10,7 +10,7 @@
 
   <div class="form-group" style="width: 100%">
       <label for="exampleInputPassword1">Statement</label>
-      <textarea formControlName="statement" rows="8" class="form-control" [ngClass]="{ 'is-invalid': (q.statement.touched || submitted ) && q.statement.errors }"></textarea>
+      <textarea formControlName="statement" rows="5" class="form-control" [ngClass]="{ 'is-invalid': (q.statement.touched || submitted ) && q.statement.errors }"></textarea>
       <div *ngIf="(q.statement.touched || submitted ) && q.statement.errors" class="invalid-feedback">
           <div *ngIf="q.statement.errors.required">El enunciado no puede estar vacio</div>
       </div>
@@ -33,7 +33,7 @@
                 <option value="css">CSS</option>
               </select>
             </div>
-          <textarea formControlName="codeBlock" rows="8" class="form-control"></textarea>
+          <textarea formControlName="codeBlock" rows="6" class="form-control"></textarea>
       </div>
   </div>
 
