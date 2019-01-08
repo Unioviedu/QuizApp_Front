@@ -1,4 +1,4 @@
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { Routes, RouterModule} from '@angular/router';
 import { AuthGuard } from '../login/services/auth.guard';
 import { CompetitiveHomeComponent } from './components/competitive-home/competitive-home.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';

@@ -1,0 +1,45 @@
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Nueva sala!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  
+      <div class="modal-body">
+        <form [formGroup]="roomForm">
+  
+          <label for="exampleInputPassword1">Título</label>
+  
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">@</span>
+            </div>
+            <input #username type="text" formControlName="title" class="form-control" placeholder="Title" aria-label="Title"
+              aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': (form.title.touched || submitted ) && form.title.errors }">
+            <div *ngIf="(form.title.touched || submitted ) && form.title.errors" class="invalid-feedback">
+              <div *ngIf="form.title.errors.required || form.title.errors.minlength">El nombre de usuario es obligatorio.</div>
+              <div *ngIf="form.title.errors.maxlength">Máximo 16 caracteres</div>
+            </div>
+          </div>
+  
+  
+          <label for="exampleInputPassword1">Descripción</label>
+  
+          <div class="input-group mb-3">
+              <textarea formControlName="description" rows="5" class="form-control" [ngClass]="{ 'is-invalid': (form.description.touched || submitted ) && form.description.errors }"></textarea>
+            <div *ngIf="(form.description.touched || submitted ) && form.description.errors" class="invalid-feedback">
+              <div *ngIf="form.description.errors.required">Mail is required</div>
+            </div>
+          </div>
+  
+        </form>
+      </div>
+  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="create()">Crear</button>
+      </div>
+    </div>
+  </div>

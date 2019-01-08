@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { ProfileModule } from './profile/profile.module';
 import { LoginModule } from './login/login.module';
 import { CompetitiveModule } from './competitive/competitive.module';
+import { GameroomModule } from './gameroom/gameroom.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CompetitiveModule } from './competitive/competitive.module';
     ProfileModule,
     LoginModule,
     CompetitiveModule,
+    GameroomModule,
     SharedModule
   ],
   providers: [

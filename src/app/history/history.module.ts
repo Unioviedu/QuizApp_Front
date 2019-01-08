@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
 import { routing } from './history.routing';
 
 import { SectionsComponent } from './components/sections/sections.component';

@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <h1 class="display-6">Salas de juego</h1>
+  <hr class="my-4">
+  <p class="lead">Antes de comenzar a jugar, lee la documentación de la sección!</p>
+  <button class="btn btn-primary btn-lg" type="button" style="margin: 4px" data-toggle="modal" data-target="#addRoom">Crear sala</button>
+</div>
+
+<div #myModal class="modal fade" id="addRoom" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <app-add-room (newRoomEvent)="newRoom($event)" (close)="onClose($event)"></app-add-room>
+</div>
+
+<div class="card-columns">
+  <app-room-card [room]="room" *ngFor="let room of rooms"></app-room-card>
+</div>

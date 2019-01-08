@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Section } from '../../../history/model/section.model';
-import { SectionsService } from '../../../history/services/sections.service';
 
 @Component({
   selector: 'app-section-card',
