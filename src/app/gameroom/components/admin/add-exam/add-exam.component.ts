@@ -4,6 +4,8 @@ import { AddExamService } from '../../../services/AddExamService';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { GameRoomService } from '../../../services/GameRoomService';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-add-exam',
   templateUrl: './add-exam.component.html',
@@ -58,7 +60,6 @@ export class AddExamComponent implements OnInit {
   save() {
     var me = this;
 
-    let moment = require('moment');
     let beginDate = moment(this.beginDate).format('YYYY-MM-DD').toString();
     let finishDate = moment(this.finishDate).format('YYYY-MM-DD').toString();
 
