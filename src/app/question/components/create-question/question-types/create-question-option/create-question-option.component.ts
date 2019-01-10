@@ -10,6 +10,7 @@ import { GenericQuestionComponent } from '../../generic-question/generic-questio
 export class CreateQuestionOptionComponent implements OnInit {
   @ViewChild(GenericQuestionComponent) genericQuestion: GenericQuestionComponent;
   @Output() newQuestionEvent: EventEmitter<any> = new EventEmitter();
+  @Output() backEvent: EventEmitter<any> = new EventEmitter();
 
   optionsForm: FormGroup;
   options: any = ['option0', 'option1'];
@@ -172,6 +173,10 @@ export class CreateQuestionOptionComponent implements OnInit {
     this.isLastOption = false;
     this.isAllOptionCorrect = false;
     this.isLastOptionCorrect = false;
+  }
+
+  back() {
+    this.backEvent.emit();
   }
 
 }

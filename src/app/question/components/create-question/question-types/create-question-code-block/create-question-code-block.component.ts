@@ -14,6 +14,7 @@ export class CreateQuestionCodeBlockComponent implements OnInit {
 
   @ViewChild(GenericQuestionComponent) genericQuestion: GenericQuestionComponent;
   @Output() newQuestionEvent: EventEmitter<any> = new EventEmitter();
+  @Output() backEvent: EventEmitter<any> = new EventEmitter();
 
   contById = 0;
   options: OptionCodeBlock[] = [];
@@ -181,6 +182,10 @@ export class CreateQuestionCodeBlockComponent implements OnInit {
 
   get q() {
     return this.questionForm.controls;
+  }
+
+  back() {
+    this.backEvent.emit();
   }
 
 }

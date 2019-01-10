@@ -11,6 +11,7 @@ import { GenericQuestionComponent } from '../../generic-question/generic-questio
 export class CreateQuestionCompleteCodeComponent implements OnInit {
   @ViewChild(GenericQuestionComponent) genericQuestion: GenericQuestionComponent;
   @Output() newQuestionEvent: EventEmitter<any> = new EventEmitter();
+  @Output() backEvent: EventEmitter<any> = new EventEmitter();
 
   contId: number;
   submitted: boolean;
@@ -170,6 +171,10 @@ export class CreateQuestionCompleteCodeComponent implements OnInit {
     else if (type == 1) {
       return o[response].errors.required;
     }
+  }
+
+  back() {
+    this.backEvent.emit();
   }
 
 }

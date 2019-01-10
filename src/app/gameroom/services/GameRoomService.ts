@@ -17,8 +17,16 @@ import { HttpClient } from '@angular/common/http';
         return this.http.post<any>(`${this.url}/newGameRoom`, room);
     }
 
+    createNewExam(exam: any) {
+      return this.http.post<any>(`${this.url}/newExam`, exam);
+    }
+
     findRoomsByAdmin() {
       return this.http.get<any>(`${this.url}/findByAdmin/?admin=${this.getCurrentUser()}`);
+    }
+
+    findRoomById(id: string) {
+      return this.http.get<any>(`${this.url}/findById/?id=${id}`);
     }
   
     getCurrentUser() {
