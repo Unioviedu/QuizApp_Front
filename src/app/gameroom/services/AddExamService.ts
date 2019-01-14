@@ -1,6 +1,4 @@
 import { Injectable, Component } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +17,13 @@ import { HttpClient } from '@angular/common/http';
 
     removeQuestion(index) {
         this.questions.splice(index, 1);
+    }
+
+    getQuestions() {
+        this.questions.forEach(function(question, index) {
+            question.orden = index+1;
+        });
+        return this.questions;
     }
 
     clear() {

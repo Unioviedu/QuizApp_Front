@@ -1,0 +1,23 @@
+<div class="card" [ngStyle]="{'opacity':exam.state === 'CREATED' ? 0.5 : 1}">
+  
+    <div class="card-body">
+  
+        <h4 class="card-title">{{exam.title}}
+                <span *ngIf="exam.state === 'CREATED'" class="badge badge-danger">Inactivo</span>
+                <span *ngIf="exam.state === 'ACTIVE'" class="badge badge-success">Active</span>
+                <span *ngIf="exam.state === 'FINISH'" class="badge badge-warning">Finalizado</span>
+        </h4>
+  
+        <p class="card-text">{{exam.description}}</p>
+  
+        <button *ngIf="isAdmin" (click)="showResults()" type="button" class="btn btn-primary btn-block" [disabled]="exam.state === 'CREATED'">Ver resultados
+        </button>
+
+        <button *ngIf="!isAdmin" (click)="playExam(exam.id)" type="button" class="btn btn-primary btn-block" [disabled]="exam.state === 'CREATED'">Jugar
+        </button>
+    </div>
+
+    <div class="card-footer text-muted">
+        {{exam.beginDate}} - {{exam.finishDate}}
+    </div>
+  </div>

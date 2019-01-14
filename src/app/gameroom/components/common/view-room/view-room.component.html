@@ -1,0 +1,57 @@
+<div class="jumbotron">
+  <h1 class="display-6">{{room.title}}</h1>
+
+  <div *ngIf="isAdmin">
+      <hr class="my-4">
+      <p class="lead">Antes de comenzar a jugar, lee la documentación de la sección!</p>
+      <button class="btn btn-primary btn-lg" type="button" style="margin: 4px" data-toggle="modal" (click)="addExam()">Crear
+        examen</button>
+      <div class="btn-group">
+        <button type="button" class="btn btn-info dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          Usuarios
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" data-toggle="modal" data-target="#userModal">Ver usuarios</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#inviteUserModal">Invitar usuarios</a>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+<div class="input-group mb-3">
+  <div class="custom-control custom-checkbox">
+    <input #active type="checkbox" class="custom-control-input" id="customCheck1" (click)="addFilter('active', active.checked)">
+    <label class="custom-control-label" for="customCheck1">Ver activos</label>
+  </div>
+</div>
+<div class="input-group mb-3">
+  <input #name type="text" class="form-control" placeholder="Filtrar examenes" aria-label="Filtrar examenes"
+    aria-describedby="button-addon2" (keyup)="addFilter('title', name.value)">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+      <i [ngClass]="'fas fa-sort-amount-'+directionSort"></i>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" (click)="sort('date', 'down')">Fecha descendiente</a>
+      <a class="dropdown-item" (click)="sort('date', 'up')">Fecha ascendiente</a>
+    </div>
+  </div>
+</div>
+
+<div class="card-columns">
+  <app-exam-card [isAdmin]="isAdmin" [exam]="exam" *ngFor="let exam of examsFilter"></app-exam-card>
+</div>
+
+
+<div #userModal class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <app-users-room></app-users-room>
+</div>
+
+<div #inviteUserModal class="modal fade" id="inviteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <app-invite-users [idRoom]="room.id"></app-invite-users>
+</div>

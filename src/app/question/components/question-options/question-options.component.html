@@ -18,4 +18,14 @@
     </div>
 </div>
 
-<button type="button" class="btn btn-success btn-lg btn-block" (click)="qualify()">{{nameButton}}</button>
+<div *ngIf="isExam" class="container">
+    <div class="row">
+        <div class="col">
+                <button *ngIf="data.orden != 1" (click)="backQuestion()" type="button" class="btn btn-primary btn-lg btn-block">Anterior</button>
+        </div>
+        <div class="col">
+                <button *ngIf="data.orden != data.nQuestions" (click)="nextQuestion()" type="button" class="btn btn-primary btn-lg btn-block">Siguiente</button>
+        </div>
+    </div>
+</div>
+<button *ngIf="!isExam" type="button" class="btn btn-success btn-lg btn-block" (click)="qualify()">{{nameButton}}</button>

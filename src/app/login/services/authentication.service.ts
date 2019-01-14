@@ -39,7 +39,19 @@ export class AuthenticationService {
     return this.http.get<any>(`${this.url}/uniqueUsername?username=${ user }`);
   }
 
+  getUserRole() {
+    return this.http.get<any>(`${this.url}/getUserRole?username=${ this.getCurrentUser() }`);
+  }
+
+  getUser(user: string) {
+    return this.http.get<any>(`${this.url}/user?username=${ user }`);
+  }
+
   register(newUser: any) {
     return this.http.post<any>(`${this.url}/register`, newUser);
+  }
+
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem('currentUser')).username;
   }
 }

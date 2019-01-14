@@ -5,6 +5,7 @@ import { QuestionDuo } from '../../../question/model/question-duo';
 import { Router, ActivatedRoute } from '../../../../../node_modules/@angular/router';
 import { InfoUser } from '../../../shared/model/info-user.model';
 import { Level } from '../../model/level.model';
+import { QuestionService } from '../../../question/services/question.service';
 
 declare var jQuery: any;
 
@@ -34,6 +35,7 @@ export class LevelComponent implements AfterViewInit, OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private cdr: ChangeDetectorRef,
     private sectionService: SectionsService,
+    private questionService: QuestionService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
 
@@ -55,7 +57,7 @@ export class LevelComponent implements AfterViewInit, OnInit {
     this.sectionService.getLevel(this.codSectionLevel).subscribe(
       level => {
         this.level = level;
-        this.qDuos = this.sectionService.getQuestionsDuo(level.questions);
+        this.qDuos = this.questionService.getQuestionsDuo(level.questions);
         this.loadQuestion();
         this.questions = this.qDuos.length;
       }
@@ -106,8 +108,8 @@ export class LevelComponent implements AfterViewInit, OnInit {
     }, 1500);
   }
 
-  nextQuestion(isLast: boolean) {
-    if (isLast) {
+  nextQuestion(data: any) {
+    if (data.isLast) {
       const resultLevel = {
         'idLevel': this.level.id,
         'idSection': this.level.idSection,

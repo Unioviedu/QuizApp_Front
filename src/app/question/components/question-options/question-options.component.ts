@@ -15,6 +15,7 @@ export class QuestionOptionsComponent implements OnInit{
   @Input() data: any;
   @Output() responseQuestionEvent: EventEmitter<boolean>;
   @Output() nextQuestionEvent: EventEmitter<boolean>;
+  @Output() backQuestionEvent: EventEmitter<boolean>;
 
   cont: number = 0;
   optionsSelected: number = 0;
@@ -25,10 +26,19 @@ export class QuestionOptionsComponent implements OnInit{
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
     this.nextQuestionEvent = new EventEmitter();
+    this.backQuestionEvent = new EventEmitter();
   }
 
   ngOnInit() {
     this.loadOptionsClass();
+
+    if(this.data.response) {
+      this.loadResponse();
+    }
+  }
+
+  loadResponse() {
+    this.options = this.data.response.options;
   }
 
   loadOptionsClass() {
@@ -88,6 +98,16 @@ export class QuestionOptionsComponent implements OnInit{
       return;
     }
 
+    let isCorrect = this.isCorrect();
+
+    this.responseQuestionEvent.emit(isCorrect);
+    this.markQuestion(isCorrect);
+    this.isResponse = true;
+
+    this.nameButton = this.data.isLast ? "Finalize" : "Next question";
+  }
+  
+  isCorrect() {
     let isCorrect = true;
     for (let option of this.options) {
       if (option.correct != option.selected) {
@@ -96,15 +116,24 @@ export class QuestionOptionsComponent implements OnInit{
       }
     }
 
-    this.responseQuestionEvent.emit(isCorrect);
-    this.markQuestion(isCorrect);
-    this.isResponse = true;
-
-    this.nameButton = this.data.isLast ? "Finalize" : "Next question";
+    return isCorrect;
   }
 
   nextQuestion() {
-    this.nextQuestionEvent.emit(this.data.isLast);
+    this.data.response = this.prepareResponse();
+    this.nextQuestionEvent.emit(this.data);
+  }
+
+  backQuestion() {
+    this.data.response = this.prepareResponse();
+    this.backQuestionEvent.emit(this.data);
+  }
+
+  prepareResponse() {
+    return {
+      options: this.options,
+      isCorrect: this.isCorrect
+    };
   }
 
   markQuestion(isCorrect: boolean) {

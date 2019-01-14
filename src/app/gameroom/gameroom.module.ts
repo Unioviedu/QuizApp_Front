@@ -7,16 +7,20 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { GameRoomService } from './services/GameRoomService';
 import { RoomCardComponent } from './components/common/room-card/room-card.component';
-import { ViewRoomAdminComponent } from './components/admin/view-room-admin/view-room-admin.component';
 import { AddExamComponent } from './components/admin/add-exam/add-exam.component';
 import { AddQuestionExamComponent } from './components/admin/add-question-exam/add-question-exam.component';
 import { QuestionModule } from '../question/question.module';
 import { QuestionDirective } from './directives/question.directive';
 import { TableQuestionExamComponent } from './components/admin/add-exam/table-question-exam/table-question-exam.component';
+import { ViewRoomComponent } from './components/common/view-room/view-room.component';
 
 import {CalendarModule} from 'primeng/calendar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { UsersRoomComponent } from './components/admin/users-room/users-room.component';
+import { InviteUsersComponent } from './components/admin/invite-users/invite-users.component';
+import { ExamCardComponent } from './components/common/exam-card/exam-card.component';
+import { PlayExamComponent } from './components/general/play-exam/play-exam.component';
 
 @NgModule({
   imports: [
@@ -33,11 +37,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     RoomsComponent,
     AddRoomComponent,
     RoomCardComponent,
-    ViewRoomAdminComponent,
+    ViewRoomComponent,
     AddExamComponent,
     AddQuestionExamComponent,
     QuestionDirective,
-    TableQuestionExamComponent
+    TableQuestionExamComponent,
+    ExamCardComponent,
+    UsersRoomComponent,
+    InviteUsersComponent,
+    PlayExamComponent
   ],
   providers: [
     GameRoomService

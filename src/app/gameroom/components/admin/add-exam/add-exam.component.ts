@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AddExamService } from '../../../services/AddExamService';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { GameRoomService } from '../../../services/GameRoomService';
@@ -12,6 +12,7 @@ import * as moment from 'moment';
   styleUrls: ['./add-exam.component.css']
 })
 export class AddExamComponent implements OnInit {
+  idRoom: any;
   questions = [];
   examForm: FormGroup;
 
@@ -20,7 +21,12 @@ export class AddExamComponent implements OnInit {
   finishDate: Date;
 
   constructor(private router: Router, private addExamService: AddExamService,
-    private formBuilder: FormBuilder, private gameRoomService: GameRoomService) {
+    private formBuilder: FormBuilder, private gameRoomService: GameRoomService,
+    private activatedRoute: ActivatedRoute) {
+
+      this.activatedRoute.params.subscribe(params => {
+        this.idRoom = params['id'];
+      });
 
     this.examForm = this.formBuilder.group({
       title: ['', []],
@@ -64,10 +70,10 @@ export class AddExamComponent implements OnInit {
     let finishDate = moment(this.finishDate).format('YYYY-MM-DD').toString();
 
     var exam = {
-      idRoom: this.addExamService.idRoom,
+      idRoom: this.idRoom,
       title: this.examForm.controls['title'].value,
       description: this.examForm.controls['description'].value,
-      exercises: this.addExamService.questions,
+      exercises: this.addExamService.getQuestions(),
       beginDate: beginDate,
       finishDate: finishDate
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AddExamService } from '../../../services/AddExamService';
 
 @Component({
@@ -8,8 +8,14 @@ import { AddExamService } from '../../../services/AddExamService';
   styleUrls: ['./add-question-exam.component.css']
 })
 export class AddQuestionExamComponent implements OnInit {
+  idRoom: any;
 
-  constructor(private router: Router, private addExamService: AddExamService) { }
+  constructor(private router: Router, private addExamService: AddExamService,
+    private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.idRoom = params['id'];
+    });
+  }
 
   ngOnInit() {
   }
@@ -20,7 +26,7 @@ export class AddQuestionExamComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate( ['/addExam'] );
+    this.router.navigate( ['/addExam', this.idRoom] );
   }
 
 }

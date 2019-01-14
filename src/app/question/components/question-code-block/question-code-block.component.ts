@@ -10,6 +10,7 @@ export class QuestionCodeBlockComponent implements OnInit {
   @Input() data: any;
   @Output() responseQuestionEvent: EventEmitter<boolean>;
   @Output() nextQuestionEvent: EventEmitter<boolean>;
+  @Output() backQuestionEvent: EventEmitter<boolean>;
 
   isResponse:boolean = false;
 
@@ -21,10 +22,16 @@ export class QuestionCodeBlockComponent implements OnInit {
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
     this.nextQuestionEvent = new EventEmitter();
+    this.backQuestionEvent = new EventEmitter();
   }
 
   ngOnInit() {
     this.loadData();
+
+    if (this.data.response) {
+      this.blocksOptions = this.data.response.blocksOptions;
+      this.blocksResponse = this.data.response.blocksResponse;
+    }
   }
 
   loadData() {
@@ -59,7 +66,21 @@ export class QuestionCodeBlockComponent implements OnInit {
   }
 
   nextQuestion() {
-    this.nextQuestionEvent.emit(this.data.isLast);
+    this.data.response = this.prepareResponse();
+    this.nextQuestionEvent.emit(this.data);
+  }
+
+  backQuestion() {
+    this.data.response = this.prepareResponse();
+    this.backQuestionEvent.emit(this.data);
+  }
+
+  prepareResponse() {
+    return {
+      blocksOptions: this.blocksOptions,
+      blocksResponse: this.blocksResponse,
+      isCorrect: this.compareResponse()
+    };
   }
 
   compareResponse():boolean {

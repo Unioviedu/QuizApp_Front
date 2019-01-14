@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ComponentFactoryResolver, ChangeDetectorR
 import { QuestionDirective } from './directives/question.directive';
 import { CompetitiveService } from '../../services/competitive.services';
 import { InfoUser } from 'src/app/shared/model/info-user.model';
+import { QuestionService } from '../../../question/services/question.service';
 
 declare var jQuery: any;
 
@@ -25,6 +26,7 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   newInfo: InfoUser = new InfoUser(undefined);
 
   constructor(private service: CompetitiveService,
+    private questionService: QuestionService,
     private cdr: ChangeDetectorRef,
     private componentFactoryResolver: ComponentFactoryResolver) { }
 
@@ -47,7 +49,7 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   }
 
   loadQuestion() {
-    const qDuo = this.service.getDuoQuestion(this.currentQuestion.question);
+    const qDuo = this.questionService.getQuestionDuo(this.currentQuestion.question);
 
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(qDuo.component);
     const viewContainerRef = this.dQuestion.viewContainerRef;
@@ -85,7 +87,7 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
     }
   }
 
-  nextQuestion(isLast: boolean) {
+  nextQuestion(data:any) {
     if (this.isForVote) {
       jQuery(this.modalVote.nativeElement).modal('show');
     } else {

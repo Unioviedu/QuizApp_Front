@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AddExamService } from '../../../../services/AddExamService';
 import { QuestionCodeBlockComponent } from '../../../../../question/components/question-code-block/question-code-block.component';
 import { QuestionOptionsComponent } from '../../../../../question/components/question-options/question-options.component';
@@ -17,22 +17,27 @@ export class TableQuestionExamComponent implements OnInit {
   @ViewChild(QuestionDirective) dQuestion: QuestionDirective;
   @ViewChild('questionModal') qModal;
 
+  idRoom: any;
   questions = [];
 
   constructor(private router: Router, private addExamService: AddExamService,
     private componentFactoryResolver: ComponentFactoryResolver,
-    private cdr: ChangeDetectorRef) {
-      this.questions = addExamService.questions;
-    }
+    private cdr: ChangeDetectorRef, private activatedRoute: ActivatedRoute) {
+
+    this.activatedRoute.params.subscribe(params => {
+      this.idRoom = params['id'];
+    });
+    this.questions = addExamService.questions;
+  }
 
   ngOnInit() {
   }
 
   addQuestion() {
-    this.router.navigate( ['/addQuestion'] );
+    this.router.navigate(['/addQuestion', this.idRoom]);
   }
 
-  removeQuestion(index:number) {
+  removeQuestion(index: number) {
     this.addExamService.removeQuestion(index);
   }
 
@@ -65,14 +70,14 @@ export class TableQuestionExamComponent implements OnInit {
 
     const componentRef = viewContainerRef.createComponent(componentFactory);
     const componentInstance = <any>componentRef.instance;
-    
+
     componentInstance.data = question;
     componentInstance.responseQuestionEvent.subscribe(($event) => this.responseQuestion($event));
     componentInstance.nextQuestionEvent.subscribe(($event) => this.nextQuestion($event));
   }
 
   responseQuestion(event) {
-    
+
   }
 
   nextQuestion(event) {

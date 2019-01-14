@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameRoomService } from '../../../services/GameRoomService';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../../login/services/authentication.service';
 
 declare var jQuery: any;
 
@@ -13,20 +14,41 @@ export class RoomsComponent implements OnInit {
   @ViewChild('myModal') myModal;
   rooms = [];
 
-  constructor(private router: Router, private gameRoomService: GameRoomService) { }
+  isAdmin: boolean;
+
+  constructor(private router: Router, private gameRoomService: GameRoomService,
+    private authentication: AuthenticationService) { }
 
   ngOnInit() {
-    this.loadRooms();
+    this.checkRole();
+  }
+
+  checkRole() {
+    var me = this;
+    this.authentication.getUserRole().subscribe(
+      role => {
+        me.isAdmin = role === 'ADMIN';
+        this.loadRooms();
+      }
+    );
   }
 
   loadRooms () {
     var me = this;
 
-    this.gameRoomService.findRoomsByAdmin().subscribe(
-      rooms => {
-        me.rooms = rooms;
-      }
-    )
+    if (this.isAdmin) {
+      this.gameRoomService.findRoomsByAdmin().subscribe(
+        rooms => {
+          me.rooms = rooms;
+        }
+      );
+    } else {
+      this.gameRoomService.findRoomsByUser().subscribe(
+        rooms => {
+          me.rooms = rooms;
+        }
+      );
+    }
   }
 
   newRoom() {

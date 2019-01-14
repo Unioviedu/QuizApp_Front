@@ -39,26 +39,6 @@ export class SectionsService {
     return this.http.get<Level>(`${this.url}/level/${codSectionLevel}?username=${this.getCurrentUser()}`);
   }
 
-  getQuestionsDuo(questions) {
-    
-    const qDuos: QuestionDuo[] = [];
-
-    questions.sort( (q1, q2) => q1.orden - q2.orden).forEach( (question, index) => {
-      question.isLast = index === questions.length - 1;
-      let qDuo: QuestionDuo;
-      if (question.type === 'option') {
-        qDuo = new QuestionDuo(QuestionOptionsComponent, question);
-      } else if (question.type === 'codeBlock') {
-        qDuo = new QuestionDuo(QuestionCodeBlockComponent, question);
-      } else if (question.type == 'completeCode') {
-        qDuo = new QuestionDuo(QuestionCompleteCodeComponent, question);
-      }
-      qDuos.push(qDuo);
-    });
-
-    return qDuos;
-  }
-
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser')).username;
   }

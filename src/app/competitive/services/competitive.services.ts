@@ -47,16 +47,5 @@ export class CompetitiveService {
     return this.http.get<any>(`${this.url}/nextQuestion?username=${username}&cont=${cont}`);
   }
 
-  getDuoQuestion(question: any) {
-    let qDuo;
-        if (question.type === 'option') {
-          qDuo = new QuestionDuo(QuestionOptionsComponent, question);
-        } else if (question.type === 'codeBlock') {
-          qDuo = new QuestionDuo(QuestionCodeBlockComponent, question);
-        }
-
-        return qDuo;
-  }
-
 
 }

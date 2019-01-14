@@ -1,7 +1,23 @@
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Bienvenido!</h4>
-  <p>Acabas de entrar en la revolución de la enseñanza online, entraras como un pringrao que no sabe programar pero saldras.... 
-    como el mismo pringao pero sabiendo hacer una página web. Te recomiendo empezar por el modo historia.</p>
-  <hr>
-  <p class="mb-0">Esto es un fase beta, si ves algo raro, estas avisado.</p>
+<div *ngFor="let notification of notifications">
+
+  <div [ngSwitch]="notification.type">
+
+    <div *ngSwitchCase="'INITIAL'" class="alert alert-success" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="alert-heading">{{notification.title}}</h4>
+      <p>{{notification.description}}</p>
+    </div>
+
+    <div *ngSwitchCase="'INVITE_ROOM'" class="alert alert-info" role="alert">
+      <h4 class="alert-heading">{{notification.title}}</h4>
+      <p>{{notification.description}}</p>
+      <hr>
+      <button (click)="acceptInvitation(notification)" type="button" class="btn btn-primary" style="margin: 5px">Aceptar</button>
+      <button type="button" class="btn btn-danger">Cancelar</button>
+    </div>
+
+  </div>
+
 </div>

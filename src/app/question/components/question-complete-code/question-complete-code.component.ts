@@ -9,6 +9,7 @@ export class QuestionCompleteCodeComponent implements OnInit {
   @Input() data: any;
   @Output() responseQuestionEvent: EventEmitter<boolean>;
   @Output() nextQuestionEvent: EventEmitter<boolean>;
+  @Output() backQuestionEvent: EventEmitter<boolean>;
 
   isResponse: boolean;
   nameButton: string = "Correguir!";
@@ -17,21 +18,52 @@ export class QuestionCompleteCodeComponent implements OnInit {
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
     this.nextQuestionEvent = new EventEmitter();
+    this.backQuestionEvent = new EventEmitter();
   }
 
   ngOnInit() {
     this.data.linesCode.forEach((line, index) => {
       this.response[index] = "";
     });
+
+    if (this.data.response) {
+      this.response = this.data.response.lines;
+    }
   }
 
   qualify() {
-    let isCorrect = true;
 
     if (this.isResponse) {
       this.nextQuestion();
       return;
     }
+
+    let isCorrect = this.compareResponse();
+    
+    this.responseQuestionEvent.emit(isCorrect);
+    this.isResponse = true;
+    this.nameButton = this.data.isLast ? "Ver resultados" : "Siguiente";
+  }
+
+  nextQuestion() {
+    this.data.response = this.prepareResponse();
+    this.nextQuestionEvent.emit(this.data);
+  }
+
+  backQuestion() {
+    this.data.response = this.prepareResponse();
+    this.backQuestionEvent.emit(this.data);
+  }
+
+  prepareResponse() {
+    return {
+      lines: this.response,
+      isCorrect: this.compareResponse()
+    };
+  }
+
+  compareResponse():boolean {
+    let isCorrect = true;
 
     this.data.linesCode.forEach( (line, index) => {
       let response = this.response[index];
@@ -43,16 +75,10 @@ export class QuestionCompleteCodeComponent implements OnInit {
         }
       });
 
-      isCorrect = result;
-    })
-    
-    this.responseQuestionEvent.emit(isCorrect);
-    this.isResponse = true;
-    this.nameButton = this.data.isLast ? "Ver resultados" : "Siguiente";
-  }
+      isCorrect = result && isCorrect;
+    });
 
-  nextQuestion() {
-    this.nextQuestionEvent.emit(this.data.isLast);
+    return isCorrect;
   }
 
   get button() {
