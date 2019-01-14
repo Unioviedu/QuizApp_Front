@@ -16,9 +16,8 @@ export class AddExamComponent implements OnInit {
   questions = [];
   examForm: FormGroup;
 
-  es: any;
-  beginDate: Date;
-  finishDate: Date;
+  beginDate: any;
+  finishDate: any;
 
   constructor(private router: Router, private addExamService: AddExamService,
     private formBuilder: FormBuilder, private gameRoomService: GameRoomService,
@@ -35,39 +34,13 @@ export class AddExamComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.es = {
-      closeText: "Cerrar",
-      prevText: "Anterior",
-      nextText: "Siguiente",
-      monthNames: ["Enero","Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-      monthNamesShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-      dayNames: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-      dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-      dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-      weekHeader: "Semana",
-      firstDay: 0,
-      isRTL: false,
-      showMonthAfterYear: false,
-      yearSuffix: "",
-      timeOnlyTitle: "Solo hora",
-      timeText: "Tiempo",
-      hourText: "Hora",
-      minuteText: "Minuto",
-      secondText: "Segundo",
-      currentText: "Fecha actual",
-      ampm: false,
-      month: "Mes",
-      week: "Semana",
-      day: "Día",
-      allDayText : "Todo el día"
-  };
+    
   }
 
   save() {
     var me = this;
-
-    let beginDate = moment(this.beginDate).format('YYYY-MM-DD').toString();
-    let finishDate = moment(this.finishDate).format('YYYY-MM-DD').toString();
+    let beginDate = moment(this.beginDate.jsdate).format('YYYY-MM-DD').toString();
+    let finishDate = moment(this.finishDate.jsdate).format('YYYY-MM-DD').toString();
 
     var exam = {
       idRoom: this.idRoom,

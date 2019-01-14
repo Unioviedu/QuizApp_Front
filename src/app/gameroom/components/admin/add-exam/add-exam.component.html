@@ -1,47 +1,49 @@
 <div class="card ">
-        <div class="card-header">
+    <div class="card-header">
 
+    </div>
+
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="descripcion" style="margin: 10px;">Fecha de comienzo</label>
+                <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                    [(ngModel)]="beginDate" required></my-date-picker>
+            </div>
+            <div class="col-sm-6">
+                <label for="descripcion" style="margin: 10px;">Fecha de finalización</label>
+                <my-date-picker name="mydate" [options]="myDatePickerOptions"
+                    [(ngModel)]="finishDate" required></my-date-picker>
+            </div>
         </div>
-
-
-        <div class="card-body">
-                <div class="row">
-                        <div class="col-sm-6">
-                            <label for="descripcion" style="margin: 10px;">Fecha de comienzo</label>
-                            <p-calendar [(ngModel)]="beginDate" [locale]="es"></p-calendar>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="descripcion" style="margin: 10px;">Fecha de finalización</label>
-                            <p-calendar [(ngModel)]="finishDate" [locale]="es"></p-calendar>
-                        </div>
-                </div>
-                <hr>
-                <div class="row">
-                        <div class="col-sm-6">
-                            <form [formGroup]="examForm">
-                                <div class="form-group">
-                                    <label for="titulo">Título</label>
-                                    <input formControlName="title" type="text" class="form-control" id="formGroupExampleInput">
-                                </div>
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción</label>
-                                    <textarea formControlName="description" rows="5" class="form-control"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                    
-                    
-                        <div class="col-sm-6">
-                            <app-table-question-exam></app-table-question-exam>
-                        </div>
-                    </div>
-        </div>
-
         <hr>
-        <div class="container text-right">
-            <button (click)="save()" type="submit" class="btn btn-primary" style="margin: 10px">Guardar</button>
-            <button (click)="finish()" type="submit" class="btn btn-secondary">Volver</button>
+        <div class="row">
+            <div class="col-sm-6">
+                <form [formGroup]="examForm">
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input formControlName="title" type="text" class="form-control" id="formGroupExampleInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea formControlName="description" rows="5" class="form-control"></textarea>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="col-sm-6">
+                <app-table-question-exam></app-table-question-exam>
+            </div>
         </div>
+    </div>
+
+    <hr>
+    <div class="container text-right">
+        <button (click)="save()" type="submit" class="btn btn-primary" style="margin: 10px">Guardar</button>
+        <button (click)="finish()" type="submit" class="btn btn-secondary">Volver</button>
+    </div>
 
 
 </div>

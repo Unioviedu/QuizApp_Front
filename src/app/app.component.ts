@@ -24,8 +24,13 @@ export class AppComponent {
       .getException()
       .subscribe(status => {
         if (status != 400) {
+          var me = this;
           this.status = status;
           this.alertException = true;
+
+          setTimeout(function() { 
+            me.alertException = false; 
+          }, 4000);
         }
       });
 

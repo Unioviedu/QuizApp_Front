@@ -14,13 +14,13 @@ import { QuestionDirective } from './directives/question.directive';
 import { TableQuestionExamComponent } from './components/admin/add-exam/table-question-exam/table-question-exam.component';
 import { ViewRoomComponent } from './components/common/view-room/view-room.component';
 
-import {CalendarModule} from 'primeng/calendar';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UsersRoomComponent } from './components/admin/users-room/users-room.component';
 import { InviteUsersComponent } from './components/admin/invite-users/invite-users.component';
 import { ExamCardComponent } from './components/common/exam-card/exam-card.component';
 import { PlayExamComponent } from './components/general/play-exam/play-exam.component';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   imports: [
@@ -29,9 +29,9 @@ import { PlayExamComponent } from './components/general/play-exam/play-exam.comp
     ReactiveFormsModule,
     FormsModule,
     QuestionModule,
-    CalendarModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MyDatePickerModule
   ],
   declarations: [
     RoomsComponent,
