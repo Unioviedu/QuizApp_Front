@@ -33,7 +33,7 @@ export class AppComponent {
   }
 
   initializeWebSocketConnection(){
-    let ws = new SockJS(this.serverUrl);
+    /*let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
@@ -41,7 +41,7 @@ export class AppComponent {
         debugger
         alert(message);
       });
-    });
+    });*/
   }
 
   closeException() {
