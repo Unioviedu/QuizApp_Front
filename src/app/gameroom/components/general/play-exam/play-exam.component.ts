@@ -22,6 +22,7 @@ export class PlayExamComponent implements OnInit {
   calification: any = {};
 
   qDuos: QuestionDuo[];
+  currentComponent: any;
 
   constructor(private activatedRoute: ActivatedRoute,
     private gameRoomService: GameRoomService,
@@ -69,6 +70,8 @@ export class PlayExamComponent implements OnInit {
 
     componentInstance.nextQuestionEvent.subscribe(($event) => this.nextQuestion($event));
     componentInstance.backQuestionEvent.subscribe(($event) => this.backQuestion($event));
+    
+    this.currentComponent = componentInstance;
   }
 
   finishExam() {
@@ -99,6 +102,14 @@ export class PlayExamComponent implements OnInit {
   backQuestion(data: any) {
     this.qDuos[data.orden-1].data = data;
     this.index--;
+    this.loadQuestion();
+  }
+
+  goQuestion(index) {
+    this.currentComponent.data.response = this.currentComponent.prepareResponse();
+    let data = this.currentComponent.data;
+    this.qDuos[data.orden-1].data = data;
+    this.index = index;
     this.loadQuestion();
   }
 
