@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameRoomService } from '../../../services/GameRoomService';
 import { AddExamService } from '../../../services/AddExamService';
 import * as moment from 'moment';
 import { AuthenticationService } from '../../../../login/services/authentication.service';
+import { ResultsExamComponent } from '../../admin/results-exam/results-exam.component';
+
+declare var jQuery: any;
 
 @Component({
   selector: 'app-view-room',
@@ -11,6 +14,8 @@ import { AuthenticationService } from '../../../../login/services/authentication
   styleUrls: ['./view-room.component.css']
 })
 export class ViewRoomComponent implements OnInit {
+  @ViewChild(ResultsExamComponent) resultAdmin;
+  @ViewChild('resultsAdmin') rAdminModal;
   isAdmin: boolean;
 
   idRoom: string;
@@ -47,6 +52,11 @@ export class ViewRoomComponent implements OnInit {
         me.isAdmin = role == 'ADMIN';
       }
     );
+  }
+
+  viewResultsExam(exam) {
+    this.resultAdmin.results = exam.results;
+    jQuery(this.rAdminModal.nativeElement).modal('show');
   }
 
   loadRoom() {

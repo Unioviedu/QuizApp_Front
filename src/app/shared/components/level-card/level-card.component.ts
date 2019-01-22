@@ -29,7 +29,7 @@ export class LevelCardComponent implements OnInit {
   }
 
   createBadge() {
-    if (!this.level.unlocked) {
+    if (this.level.unlocked == false) {
         this.classBadge = this.NAME_BADGE+"danger";
         this.msgBadge = "Lock";
         this.opacity = 0.5;

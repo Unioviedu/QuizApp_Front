@@ -26,6 +26,7 @@
     "express": "^4.16.4",
     "mydatepicker": "^2.6.6",
     "net": "^1.0.2",
+    "ng4-loading-spinner": "^1.2.3",
     "ngx-highlight-js": "^2.1.1",
     "path": "^0.12.7",
     "rxjs": "^6.0.0",

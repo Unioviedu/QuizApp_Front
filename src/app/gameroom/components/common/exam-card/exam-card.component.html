@@ -10,7 +10,10 @@
   
         <p class="card-text">{{exam.description}}</p>
   
-        <button *ngIf="isAdmin" (click)="showResults()" type="button" class="btn btn-primary btn-block" [disabled]="exam.state === 'CREATED'">Ver resultados
+        <button *ngIf="isAdmin" (click)="showResults()" 
+            type="button" class="btn btn-primary btn-block" 
+            [disabled]="exam.state === 'CREATED'">
+                Ver resultados
         </button>
 
         <button *ngIf="!isAdmin" (click)="playExam(exam.id)" type="button" class="btn btn-primary btn-block" [disabled]="exam.state === 'CREATED'">Jugar

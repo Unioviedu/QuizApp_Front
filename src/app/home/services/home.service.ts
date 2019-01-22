@@ -16,6 +16,10 @@ export class HomeService {
     return this.http.get<any>(`${this.url}/findAllNotifications/?username=${this.getCurrentUser()}`);
   }
 
+  removeNotification(id) {
+    return this.http.get<any>(`${this.url}/removeNotification/?username=${this.getCurrentUser()}&id=${id}`);
+  }
+
   addUserToRoom(idRoom) {
     var room = {
       id: idRoom,

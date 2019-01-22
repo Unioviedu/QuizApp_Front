@@ -4,6 +4,8 @@ import { Observable, Subject  } from 'rxjs';
 @Injectable()
 export class ExceptionService {
     private subject = new Subject<any>();
+    private request = new Subject<any>();
+    private response = new Subject<any>();
  
     sendException(status: string) {
         this.subject.next(status);

@@ -21,6 +21,7 @@ import { InviteUsersComponent } from './components/admin/invite-users/invite-use
 import { ExamCardComponent } from './components/common/exam-card/exam-card.component';
 import { PlayExamComponent } from './components/general/play-exam/play-exam.component';
 import { MyDatePickerModule } from 'mydatepicker';
+import { ResultsExamComponent } from './components/admin/results-exam/results-exam.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     ExamCardComponent,
     UsersRoomComponent,
     InviteUsersComponent,
-    PlayExamComponent
+    PlayExamComponent,
+    ResultsExamComponent
   ],
   providers: [
     GameRoomService

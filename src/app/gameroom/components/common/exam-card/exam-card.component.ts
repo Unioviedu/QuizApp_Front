@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,14 +9,17 @@ import { Router } from '@angular/router';
 export class ExamCardComponent implements OnInit {
   @Input() exam: any = {};
   @Input() isAdmin: boolean;
+  @Output() viewResultsEvent: EventEmitter<boolean>;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.viewResultsEvent = new EventEmitter();
+  }
 
   ngOnInit() {
   }
 
   showResults() {
-    
+    this.viewResultsEvent.emit(this.exam);
   }
 
   playExam(id) {

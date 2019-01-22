@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { ExceptionService } from './shared/services/exception.service';
 import { Subscription } from 'rxjs';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Router, NavigationStart } from '@angular/router';
 
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   status: any;
   subscription: Subscription;
+  subscriptionReq: Subscription;
+  subscriptionRes: Subscription;
+
   title = 'quizwebapp';
 
   alertException: boolean;
@@ -19,18 +25,23 @@ export class AppComponent {
   private serverUrl = 'http://localhost:8080/socket'
   private stompClient;
 
-  constructor(private exceptionService: ExceptionService) {
+  constructor(private exceptionService: ExceptionService, private spinnerService: Ng4LoadingSpinnerService,
+    private router: Router) {
+      router.events.subscribe(event => {
+        if(event instanceof NavigationStart) {
+          this.alertException = false;
+        }
+      });
+
     this.subscription = this.exceptionService
       .getException()
       .subscribe(status => {
+        this.spinnerService.hide();
         if (status != 400) {
+          this.router.navigate(['']);
           var me = this;
           this.status = status;
           this.alertException = true;
-
-          setTimeout(function() { 
-            me.alertException = false; 
-          }, 4000);
         }
       });
 

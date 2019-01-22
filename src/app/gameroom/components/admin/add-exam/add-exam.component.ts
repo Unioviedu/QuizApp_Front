@@ -34,7 +34,11 @@ export class AddExamComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    if (this.addExamService.creating) {
+      this.loadInfo();
+    } else {
+      this.addExamService.creating = true;
+    }
   }
 
   save() {
@@ -56,6 +60,28 @@ export class AddExamComponent implements OnInit {
         me.finish();
       }
     );
+  }
+
+  addQuestionEvent() {
+    this.saveInfo();
+  }
+
+  saveInfo() {
+    var info = {
+      beginDate: this.beginDate,
+      finishDate: this.finishDate,
+      title: this.examForm.controls['title'].value,
+      description: this.examForm.controls['description'].value
+    };
+
+    this.addExamService.info = info;
+  }
+
+  loadInfo() {
+    this.beginDate = this.addExamService.info.beginDate;
+    this.finishDate = this.addExamService.info.finishDate;
+    this.examForm.controls['title'].setValue(this.addExamService.info.title);
+    this.examForm.controls['description'].setValue(this.addExamService.info.description); 
   }
 
   finish() {

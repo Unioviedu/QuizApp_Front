@@ -42,16 +42,21 @@
 </div>
 
 <div class="card-columns">
-  <app-exam-card [isAdmin]="isAdmin" [exam]="exam" *ngFor="let exam of examsFilter"></app-exam-card>
+  <app-exam-card (viewResultsEvent)="viewResultsExam($event)" [isAdmin]="isAdmin" [exam]="exam" *ngFor="let exam of examsFilter"></app-exam-card>
 </div>
 
 
 <div #userModal class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
-  <app-users-room></app-users-room>
+  <app-users-room [users]="room.users"></app-users-room>
 </div>
 
 <div #inviteUserModal class="modal fade" id="inviteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
   <app-invite-users [idRoom]="room.id"></app-invite-users>
+</div>
+
+<div #resultsAdmin class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+aria-hidden="true">
+<app-results-exam></app-results-exam>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { GameRoomService } from '../../../services/GameRoomService';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../../login/services/authentication.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 declare var jQuery: any;
 
@@ -17,9 +18,10 @@ export class RoomsComponent implements OnInit {
   isAdmin: boolean;
 
   constructor(private router: Router, private gameRoomService: GameRoomService,
-    private authentication: AuthenticationService) { }
+    private authentication: AuthenticationService, private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
+    this.spinnerService.show();
     this.checkRole();
   }
 
@@ -39,12 +41,14 @@ export class RoomsComponent implements OnInit {
     if (this.isAdmin) {
       this.gameRoomService.findRoomsByAdmin().subscribe(
         rooms => {
+          this.spinnerService.hide();
           me.rooms = rooms;
         }
       );
     } else {
       this.gameRoomService.findRoomsByUser().subscribe(
         rooms => {
+          this.spinnerService.hide();
           me.rooms = rooms;
         }
       );

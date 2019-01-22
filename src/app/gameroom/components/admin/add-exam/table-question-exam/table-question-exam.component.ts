@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ComponentFactoryResolver, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddExamService } from '../../../../services/AddExamService';
 import { QuestionCodeBlockComponent } from '../../../../../question/components/question-code-block/question-code-block.component';
@@ -14,6 +14,7 @@ declare var jQuery: any;
   styleUrls: ['./table-question-exam.component.css']
 })
 export class TableQuestionExamComponent implements OnInit {
+  @Output() addQuestionEvent: EventEmitter<boolean>;
   @ViewChild(QuestionDirective) dQuestion: QuestionDirective;
   @ViewChild('questionModal') qModal;
 
@@ -28,12 +29,15 @@ export class TableQuestionExamComponent implements OnInit {
       this.idRoom = params['id'];
     });
     this.questions = addExamService.questions;
+
+    this.addQuestionEvent = new EventEmitter();
   }
 
   ngOnInit() {
   }
 
   addQuestion() {
+    this.addQuestionEvent.emit();
     this.router.navigate(['/addQuestion', this.idRoom]);
   }
 

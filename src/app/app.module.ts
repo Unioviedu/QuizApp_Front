@@ -15,6 +15,7 @@ import { ProfileModule } from './profile/profile.module';
 import { LoginModule } from './login/login.module';
 import { CompetitiveModule } from './competitive/competitive.module';
 import { GameroomModule } from './gameroom/gameroom.module';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { GameroomModule } from './gameroom/gameroom.module';
     LoginModule,
     CompetitiveModule,
     GameroomModule,
-    SharedModule
+    SharedModule,
+    Ng4LoadingSpinnerModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

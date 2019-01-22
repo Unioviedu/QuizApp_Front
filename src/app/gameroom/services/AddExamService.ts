@@ -4,7 +4,10 @@ import { Injectable, Component } from '@angular/core';
     providedIn: 'root'
   })
   export class AddExamService {
+    creating = false;
     idRoom = "";
+
+    info:any = {};
     questions = [];
   
     constructor() {
@@ -29,6 +32,7 @@ import { Injectable, Component } from '@angular/core';
     clear() {
         this.idRoom = "";
         this.questions = [];
+        this.creating = false;
     }
   
   }
