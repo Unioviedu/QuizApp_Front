@@ -21,7 +21,7 @@ export class QuestionOptionsComponent implements OnInit{
   optionsSelected: number = 0;
   options: any[] = [];
   isResponse: boolean = false;
-  nameButton: string = "Qualify";
+  nameButton: string = "Correguir!";
 
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
@@ -104,7 +104,7 @@ export class QuestionOptionsComponent implements OnInit{
     this.markQuestion(isCorrect);
     this.isResponse = true;
 
-    this.nameButton = this.data.isLast ? "Finalize" : "Next question";
+    this.nameButton = this.data.isLast ? "Finalizar" : "Siguiente pregunta";
   }
   
   isCorrect() {

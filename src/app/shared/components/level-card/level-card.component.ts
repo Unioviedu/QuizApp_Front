@@ -31,12 +31,12 @@ export class LevelCardComponent implements OnInit {
   createBadge() {
     if (this.level.unlocked == false) {
         this.classBadge = this.NAME_BADGE+"danger";
-        this.msgBadge = "Lock";
+        this.msgBadge = "Bloqueado";
         this.opacity = 0.5;
         this.disabledButton = true;
     } else if (this.level.complete) {
         this.classBadge = this.NAME_BADGE+"success";
-        this.msgBadge = "Complete"
+        this.msgBadge = "Completado"
     }
   }
 

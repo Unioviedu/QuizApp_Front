@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-dialog-centered" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalCenterTitle">Register now free!</h5>
+      <h5 class="modal-title" id="exampleModalCenterTitle">Registrate totalmente gratis!</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -10,45 +10,45 @@
     <div class="modal-body">
       <form [formGroup]="registerForm">
 
-        <label for="exampleInputPassword1">Username</label>
+        <label for="exampleInputPassword1">Nombre de usuario</label>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">@</span>
           </div>
           <input #username (blur)="checkUniqueUsername(username.value)" (keyup)="checkUniqueUsername(username.value)"
-            type="text" formControlName="username" class="form-control" placeholder="Username" aria-label="Username"
+            type="text" formControlName="username" class="form-control" placeholder="Nombre de usuario" aria-label="Username"
             aria-describedby="basic-addon1" [ngClass]="{ 'is-invalid': (f.username.touched || submitted ) && f.username.errors }">
           <div *ngIf="(f.username.touched || submitted ) && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required || f.username.errors.minlength">El nombre de usuario es obligatorio.</div>
-            <div *ngIf="f.username.errors.maxlength">Máximo 16 caracteres</div>
+            <div *ngIf="f.username.errors.required">El nombre de usuario es obligatorio.</div>
+            <div *ngIf="f.username.errors.maxlength">Máximo 30 caracteres</div>
             <div *ngIf="f.username.errors.repeat">Nombre de usuario repetido</div>
           </div>
         </div>
 
 
-        <label for="exampleInputPassword1">Mail</label>
+        <label for="exampleInputPassword1">Correo</label>
 
         <div class="input-group mb-3">
-          <input type="text" formControlName="mail" class="form-control" placeholder="Mail" aria-describedby="basic-addon2"
+          <input type="text" formControlName="mail" class="form-control" placeholder="Correo" aria-describedby="basic-addon2"
             [ngClass]="{ 'is-invalid': (f.mail.touched || submitted ) && f.mail.errors }">
           <div *ngIf="(f.mail.touched || submitted ) && f.mail.errors" class="invalid-feedback">
-            <div *ngIf="f.mail.errors.required">Mail is required</div>
-            <div *ngIf="f.mail.errors.email">Mail format incorrect (example: demo@prueba.com)</div>
+            <div *ngIf="f.mail.errors.required">El correo es obligatorio</div>
+            <div *ngIf="f.mail.errors.email">El formato del correo no es correcto (ejemplo: demo@prueba.com)</div>
           </div>
         </div>
 
         <form formGroupName="passwords">
-          <label for="exampleInputPassword1">Password</label>
+          <label for="exampleInputPassword1">Contraseña</label>
 
-          <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+          <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña"
             [ngClass]="{ 'is-invalid': (p.touched || submitted ) && p.errors }">
           <div *ngIf="(p.touched || submitted ) && p.errors" class="invalid-feedback">
-            <div *ngIf="p.errors.format">La contraseña debe tener mínimo 6 caracteres</div>
+            <div *ngIf="p.errors.minlength">La contraseña debe tener mínimo 6 caracteres</div>
           </div>
 
           <input type="password" formControlName="password2" class="form-control" id="exampleInputPassword2"
-            placeholder="Repeat Password" [ngClass]="{ 'is-invalid': (f.passwords.touched || submitted ) && f.passwords.errors }">
+            placeholder="Repite la contraseña" [ngClass]="{ 'is-invalid': (f.passwords.touched || submitted ) && f.passwords.errors }">
 
           <div *ngIf="(f.passwords.touched || submitted ) && f.passwords.errors" class="invalid-feedback">
               <div *ngIf="f.passwords.errors.mismatch">Las contraseñas deben ser iguales</div>
@@ -59,8 +59,8 @@
     </div>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary" (click)="register()">Register</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="register()">Registrarse</button>
     </div>
   </div>
 </div>

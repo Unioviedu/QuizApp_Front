@@ -23,4 +23,8 @@ export class NavbarComponent implements OnInit {
     jQuery(this.navBar.nativeElement).collapse('hide');
   }
 
+  isVisible() {
+    return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
 }

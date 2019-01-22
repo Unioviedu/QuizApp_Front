@@ -1,4 +1,14 @@
-<div class="row h-100">
+<div *ngIf="notQuestions" class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Lo sentimos!</h4>
+    <p>No hay preguntas suficientes como para poder jugar a este modo ahora mismo.</p>
+    <hr>
+    <p class="mb-0">Vuelve a intentarlo en un rato, seguro que alguien se anima!.</p>
+</div>
+<div class="mx-auto" style="width: 30%">
+    <button [routerLink]="['/competitive']" type="button" class="btn btn-info btn-lg btn-block">Volver</button>
+</div>
+
+<div *ngIf="!notQuestions" class="row h-100">
     <div class="col-sm-12">
         <div class="center-block">
 
@@ -27,7 +37,7 @@
             <div class="question">
                 <ng-template app-question></ng-template>
                 <hr>
-                <button *ngIf="exitButton" [routerLink]="['/competitive']" type="button" class="btn btn-danger btn-lg btn-block">Exit</button>
+                <button *ngIf="exitButton" [routerLink]="['/competitive']" type="button" class="btn btn-danger btn-lg btn-block">Salir</button>
             </div>
 
         </div>

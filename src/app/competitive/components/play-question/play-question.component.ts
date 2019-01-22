@@ -19,6 +19,7 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   cont = 0;
   currentQuestion: any;
 
+  notQuestions: boolean;
   isForVote: boolean;
   alertType = '';
   exitButton: boolean;
@@ -41,6 +42,10 @@ export class PlayQuestionComponent implements AfterViewInit, OnInit {
   getQuestion() {
     this.service.getNextQuestion(this.cont).subscribe(
       question => {
+        if (!question.id) {
+          this.notQuestions = true;
+          return;
+        }
         this.currentQuestion = question;
         this.isForVote = this.currentQuestion.state === 'CREATED';
         this.loadQuestion();

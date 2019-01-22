@@ -1,37 +1,36 @@
 <div *ngIf="loginFailed" class="alert alert-danger alert-dismissible fade show" role="alert">
     <h4 class="alert-heading">Oh no!</h4>
-    <p>Username/Password not correct. Prueba de nuevo.</p>
+    <p>El usuario o la contraseña. Prueba de nuevo.</p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 
-<div class="container" style="margin-top: 35px;">
+<div class="container">
     <div class="text-center">
         <div class="col-lg-12">
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <img class="mb-4" src="assets/trophy.svg" alt="" width="72" height="72">
-                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <input type="text" formControlName="username" class="form-control" placeholder="Enter username"
+                    <h1 class="h3 mb-3 font-weight-normal">Inicia sesión</h1>
+                    <input type="text" formControlName="username" class="form-control" placeholder="Introduce el usuario"
                         [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                     <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Username is required</div>
+                        <div *ngIf="f.username.errors.required">El usuario es obligatorio</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" formControlName="password" class="form-control" placeholder="Enter password"
+                    <input type="password" formControlName="password" class="form-control" placeholder="Introduce la contraseña"
                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.required">La contraseña es obligatoria</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button [disabled]="loading" class="btn btn-primary">Login</button>
+                    <button [disabled]="loading" class="btn btn-primary">Entrar</button>
                 </div>
-                <a href="" text-decoration="underline" data-toggle="modal" data-target="#exampleModalCenter"><u>Register
-                        here now.</u></a>
+                <a href="" text-decoration="underline" data-toggle="modal" data-target="#exampleModalCenter"><u>Registrate ahora!</u></a>
             </form>
 
         </div>

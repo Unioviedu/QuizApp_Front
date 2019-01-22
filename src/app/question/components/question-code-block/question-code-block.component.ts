@@ -17,7 +17,7 @@ export class QuestionCodeBlockComponent implements OnInit {
   blocksOptions: any[] = [];
   blocksResponse: any[] = [];
 
-  nameButton: string = "Qualify";
+  nameButton: string = "Correguir!";
 
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
@@ -62,7 +62,7 @@ export class QuestionCodeBlockComponent implements OnInit {
     
     this.responseQuestionEvent.emit(isCorrect);
     this.isResponse = true;
-    this.nameButton = this.data.isLast ? "Finalize" : "Next question";
+    this.nameButton = this.data.isLast ? "Finalizar" : "Siguiente pregunta";
   }
 
   nextQuestion() {

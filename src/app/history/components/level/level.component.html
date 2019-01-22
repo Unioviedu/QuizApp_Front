@@ -4,8 +4,8 @@
 
             <div [ngSwitch]="alertType" *ngIf="alertType" class="alerts" style="height: 50%">
                 <div *ngSwitchCase="'correct'" class="alert alert-success alert-dismissible fade show" role="alert">
-                    <h4 class="alert-heading">Good</h4>
-                    <p>The answer is correct.</p>
+                    <h4 class="alert-heading">Bien</h4>
+                    <p>La respuesta es correcta.</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -13,7 +13,7 @@
 
                 <div *ngSwitchCase="'incorrect'" class="alert alert-danger alert-dismissible fade show" role="alert">
                     <h4 class="alert-heading">Oh...</h4>
-                    <p>The answer is incorrect.</p>
+                    <p>La respuesta es incorrecta.</p>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -39,44 +39,44 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">New info!</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Nueva infomación!</h3>
             </div>
             <div class="modal-body">
 
                 <div *ngIf="newInfo.newRank" class="alert alert-success">
-                    <h6>New RankLevel:</h6> {{newInfo.newRank.name}}
+                    <h6>Subes de rango:</h6> {{newInfo.newRank.name}}
                 </div>
 
                 <div *ngIf="newInfo.levelsUnlock.length > 0" class="alert alert-warning">
-                    <h6>Levels unlocked</h6>
+                    <h6>Niveles desbloqueados</h6>
                     <ul>
                         <li *ngFor="let level of newInfo.levelsUnlock">{{level}}</li>
                     </ul>
                 </div>
 
                 <div *ngIf="newInfo.sectionsUnlock.length > 0" class="alert alert-warning">
-                    <h6>Sections unlocked</h6>
+                    <h6>Secciones desbloqueadas</h6>
                     <ul>
                         <li *ngFor="let section of newInfo.sectionsUnlock">{{section}}</li>
                     </ul>
                 </div>
 
                 <div *ngIf="newInfo.trophiesComplete.length > 0" class="alert alert-secondary">
-                    <h6>Trophies complete</h6>
+                    <h6>Trofeos completados</h6>
                     <ul>
                         <li *ngFor="let result of newInfo.trophiesComplete">{{result.challange.title}}</li>
                     </ul>
                 </div>
 
                 <div *ngIf="newInfo.challangesComplete.length > 0" class="alert alert-secondary">
-                    <h6>Challanges complete</h6>
+                    <h6>Desafíos completados</h6>
                     <ul>
                         <li *ngFor="let result of newInfo.challangesComplete">{{result.challange.description}}</li>
                     </ul>
                 </div>
 
                 <div class="alert alert-success">
-                    <h6>Bonification:</h6> {{newInfo.newExp}} exp
+                    <h6>Bonificación:</h6> {{newInfo.newExp}} exp
                 </div>
 
             </div>

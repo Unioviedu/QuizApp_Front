@@ -42,7 +42,7 @@ export class QuestionCompleteCodeComponent implements OnInit {
     
     this.responseQuestionEvent.emit(isCorrect);
     this.isResponse = true;
-    this.nameButton = this.data.isLast ? "Ver resultados" : "Siguiente";
+    this.nameButton = this.data.isLast ? "Finalizar" : "Siguiente pregunta";
   }
 
   nextQuestion() {
