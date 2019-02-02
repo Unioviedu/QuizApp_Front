@@ -18,7 +18,7 @@ export class GenericQuestionComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {
     this.onChangeCodeBlock = new EventEmitter();
     this.questionForm = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(16)]],
+      title: ['', [Validators.required, Validators.minLength(4)]],
       statement: ['', [Validators.required]],
       codeBlock: ['', []],
       language: ['', []]

@@ -8,7 +8,7 @@ import { HomeService } from './services/home.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  user:any = {};
+  user:any;
 
   constructor(private homeService: HomeService) { 
     

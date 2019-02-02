@@ -1,7 +1,7 @@
 <form [formGroup]="questionForm">
 
   <div class="form-group" style="width: 100%;">
-      <label>Titulo</label>
+      <label>Título</label>
       <input formControlName="title" type="text" class="form-control" [ngClass]="{ 'is-invalid': (q.title.touched || submitted ) && q.title.errors }">
       <div *ngIf="(q.title.touched || submitted ) && q.title.errors" class="invalid-feedback">
           <div *ngIf="q.title.errors.required">El titulo no puede estar vacio</div>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="form-group" style="width: 100%">
-      <label for="exampleInputPassword1">Statement</label>
+      <label for="exampleInputPassword1">Enunciado</label>
       <textarea formControlName="statement" rows="5" class="form-control" [ngClass]="{ 'is-invalid': (q.statement.touched || submitted ) && q.statement.errors }"></textarea>
       <div *ngIf="(q.statement.touched || submitted ) && q.statement.errors" class="invalid-feedback">
           <div *ngIf="q.statement.errors.required">El enunciado no puede estar vacio</div>

@@ -56,6 +56,7 @@ export class ViewRoomComponent implements OnInit {
 
   viewResultsExam(exam) {
     this.resultAdmin.results = exam.results;
+    this.resultAdmin.loadInfo();
     jQuery(this.rAdminModal.nativeElement).modal('show');
   }
 

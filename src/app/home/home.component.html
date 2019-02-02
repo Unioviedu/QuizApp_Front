@@ -1,50 +1,54 @@
-<div class="jumbotron">
-  <h1 class="display-4"><strong>QuizApp!</strong></h1>
-  <p class="lead">Aprende de una manera diferente, aprende jugando.</p>
-  <hr class="my-4">
-  <p>¿Ques es QuizApp? ¿Para quién esta dirigido?</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Lee más</a>
-</div>
+<div *ngIf="user">
+  <div class="jumbotron">
+    <h1 class="display-4"><strong>QuizApp!</strong></h1>
+    <p class="lead">Aprende de una manera diferente, aprende jugando.</p>
+    <hr class="my-4">
+    <p>¿Ques es QuizApp? ¿Para quién esta dirigido?</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Lee más</a>
+  </div>
 
 
-<div class="row">
+  <div class="row">
 
-  <div class="col-lg">
-          <h2>Notificaciones</h2>
-          <hr>
-          <div *ngFor="let notification of user.notifications">
+    <div class="col-lg">
+      <h2>Notificaciones</h2>
+      <hr>
+      <div *ngFor="let notification of user.notifications">
 
-          <div [ngSwitch]="notification.type">
+        <div [ngSwitch]="notification.type">
 
-            <div *ngSwitchCase="'INITIAL'" class="alert alert-success" role="alert">
-              <button (click)="removeNotification(notification)" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="alert-heading">{{notification.title}}</h4>
-              <p>{{notification.description}}</p>
-            </div>
+          <div *ngSwitchCase="'INITIAL'" class="alert alert-success" role="alert">
+            <button (click)="removeNotification(notification)" type="button" class="close" data-dismiss="alert"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="alert-heading">{{notification.title}}</h4>
+            <p>{{notification.description}}</p>
+          </div>
 
-            <div *ngSwitchCase="'INVITE_ROOM'" class="alert alert-info" role="alert">
-              <h4 class="alert-heading">{{notification.title}}</h4>
-              <p>{{notification.description}}</p>
-              <hr>
-              <button (click)="acceptInvitation(notification)" type="button" class="btn btn-primary" style="margin: 5px">Aceptar</button>
-              <button (click)="removeNotification(notification)" type="button" class="btn btn-danger">Cancelar</button>
-            </div>
-
+          <div *ngSwitchCase="'INVITE_ROOM'" class="alert alert-info" role="alert">
+            <h4 class="alert-heading">{{notification.title}}</h4>
+            <p>{{notification.description}}</p>
+            <hr>
+            <button (click)="acceptInvitation(notification)" type="button" class="btn btn-primary" style="margin: 5px">Aceptar</button>
+            <button (click)="removeNotification(notification)" type="button" class="btn btn-danger">Cancelar</button>
           </div>
 
         </div>
-  </div>
-  <div class="col-lg">
+
+      </div>
+    </div>
+    <div class="col-lg">
       <h2>Continua...</h2>
       <hr>
       <div style="margin-bottom: 10px">
-          <app-section-card [section]="user.sectionContinue"></app-section-card>
+        <app-section-card [section]="user.sectionContinue"></app-section-card>
       </div>
-      
+
       <div>
-          <app-level-card [level]="user.levelContinue"></app-level-card>
+        <app-level-card [level]="user.levelContinue"></app-level-card>
       </div>
+    </div>
   </div>
+
 </div>

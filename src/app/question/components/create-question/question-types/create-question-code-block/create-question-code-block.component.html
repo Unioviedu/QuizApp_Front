@@ -10,7 +10,7 @@
             <form [formGroup]="optionsForm">
 
                 <div class="form-group" style="width: 100%;">
-                    <label for="exampleInputEmail1">Options</label>
+                    <label for="exampleInputEmail1">Opciones</label>
                     <div class="input-group mb-3" *ngFor="let option of options;let i = index">
                         <input (input)="onOptionChange($event.target.value, option)" type="text" formControlName="{{option.id}}"
                             class="form-control" [ngClass]="getNgClass(option.id)">
@@ -34,13 +34,13 @@
                     </div>
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button (click)="addOption()" type="button" class="btn btn-success btn-xs">Add</button>
+                            <button (click)="addOption()" type="button" class="btn btn-success btn-xs">Añadir</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group" style="width: 100%;">
-                    <label for="exampleInputEmail1">Correct Options</label>
+                    <label for="exampleInputEmail1">Opciones correctas</label>
                     <div class="input-group mb-3" *ngFor="let option of correctOptions;let i = index">
                         <div class="input-group-prepend">
                             <span class="input-group-text">{{i+1}}</span>

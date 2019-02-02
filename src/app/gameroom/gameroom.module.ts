@@ -4,6 +4,7 @@ import { RoomsComponent } from './components/common/rooms/rooms.component';
 import { routing } from '../gameroom/gameroom.routing';
 import { AddRoomComponent } from './components/admin/add-room/add-room.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 import { GameRoomService } from './services/GameRoomService';
 import { RoomCardComponent } from './components/common/room-card/room-card.component';
@@ -32,7 +33,8 @@ import { ResultsExamComponent } from './components/admin/results-exam/results-ex
     QuestionModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    ChartsModule
   ],
   declarations: [
     RoomsComponent,

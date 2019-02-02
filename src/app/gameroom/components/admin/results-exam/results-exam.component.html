@@ -8,7 +8,8 @@
     </div>
 
     <div class="modal-body" style="max-height: 500px">
-      <div class="tab-pane fade show active" id="table" role="tabpanel">
+
+      <div *ngIf="!chartView" class="tab-pane fade show active" id="table" role="tabpanel">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -23,13 +24,25 @@
               <th scope="row">{{item.key}}</th>
               <td>{{item.value.numCorrectExercises}}</td>
               <td>{{item.value.numIncorrectExercises}}</td>
-              <td></td>
+              <td>{{item.value.calification}}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
+      <div *ngIf="chartView" class="row">
+        <div style="display: block">
+          <canvas baseChart
+                      [data]="doughnutChartData"
+                      [labels]="doughnutChartLabels"
+                      [chartType]="doughnutChartType"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+
       <div class="modal-footer">
+          <button (click)="this.chartView = !this.chartView" type="button" class="btn btn-primary">{{this.chartView ? "Ver tabla" : "Ver graficos"}}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
 
