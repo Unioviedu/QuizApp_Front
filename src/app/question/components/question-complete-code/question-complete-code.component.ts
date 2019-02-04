@@ -66,11 +66,11 @@ export class QuestionCompleteCodeComponent implements OnInit {
     let isCorrect = true;
 
     this.data.linesCode.forEach( (line, index) => {
-      let response = this.response[index];
+      let response = this.response[index].replace(/ /g, "");
       
       let result = false;
       line.responses.forEach( (correct) => {
-        if (response.localeCompare(correct) == 0) {
+        if (response.localeCompare(correct.replace(/ /g, "")) == 0) {
           result = true;
         }
       });
