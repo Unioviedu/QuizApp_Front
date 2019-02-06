@@ -12,7 +12,8 @@ export class QuestionCompleteCodeComponent implements OnInit {
   @Output() backQuestionEvent: EventEmitter<boolean>;
 
   isResponse: boolean;
-  nameButton: string = "Correguir!";
+  isCorrect: boolean;
+  nameButton: string = "Corregir!";
   response: any = {};
 
   constructor() {
@@ -38,9 +39,10 @@ export class QuestionCompleteCodeComponent implements OnInit {
       return;
     }
 
-    let isCorrect = this.compareResponse();
-    
-    this.responseQuestionEvent.emit(isCorrect);
+    this.isCorrect = this.compareResponse();
+
+    this.responseQuestionEvent.emit(this.isCorrect);
+    this.markQuestion();
     this.isResponse = true;
     this.nameButton = this.data.isLast ? "Finalizar" : "Siguiente pregunta";
   }
@@ -62,23 +64,37 @@ export class QuestionCompleteCodeComponent implements OnInit {
     };
   }
 
-  compareResponse():boolean {
+  compareResponse(): boolean {
     let isCorrect = true;
 
-    this.data.linesCode.forEach( (line, index) => {
+    this.data.linesCode.forEach((line, index) => {
       let response = this.response[index].replace(/ /g, "");
-      
-      let result = false;
-      line.responses.forEach( (correct) => {
-        if (response.localeCompare(correct.replace(/ /g, "")) == 0) {
-          result = true;
-        }
-      });
 
-      isCorrect = result && isCorrect;
+      isCorrect = this.compareOneAnswer(line, response) && isCorrect;
     });
 
     return isCorrect;
+  }
+
+  compareOneAnswer(line, response) {
+    let result = false;
+    line.responses.forEach((correct) => {
+      if (response.localeCompare(correct.replace(/ /g, "")) == 0) {
+        result = true;
+      }
+    });
+
+    return result
+  }
+
+  markQuestion() {
+    if (!this.isCorrect) {
+      this.data.linesCode.forEach((line, index) => {
+        if (!this.compareOneAnswer(line, this.response[index])) {
+          this.response[index] += "\n" + "CORRECTO: " + line.responses[0]
+        }
+      });
+    }
   }
 
   get button() {

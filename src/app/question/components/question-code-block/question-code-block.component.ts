@@ -13,11 +13,12 @@ export class QuestionCodeBlockComponent implements OnInit {
   @Output() backQuestionEvent: EventEmitter<boolean>;
 
   isResponse:boolean = false;
+  isCorrect: boolean = false;
 
   blocksOptions: any[] = [];
   blocksResponse: any[] = [];
 
-  nameButton: string = "Correguir!";
+  nameButton: string = "Corregir!";
 
   constructor() {
     this.responseQuestionEvent = new EventEmitter();
@@ -49,18 +50,16 @@ export class QuestionCodeBlockComponent implements OnInit {
   }
 
   qualify() {
-    let isCorrect = false;
-
     if (this.isResponse) {
       this.nextQuestion();
       return;
     }
 
     if (this.blocksResponse.length == this.data.codeBlocksCorrect.length) {
-      isCorrect = this.compareResponse();
+      this.isCorrect = this.compareResponse();
     }
-    
-    this.responseQuestionEvent.emit(isCorrect);
+    this.markQuestion();
+    this.responseQuestionEvent.emit(this.isCorrect);
     this.isResponse = true;
     this.nameButton = this.data.isLast ? "Finalizar" : "Siguiente pregunta";
   }
@@ -101,6 +100,9 @@ export class QuestionCodeBlockComponent implements OnInit {
   }
 
   addBlock(cod: number) {
+    if (this.isResponse)
+      return;
+
     let cont = 0;
     for (let block of this.blocksOptions) {
       if (block.cod == cod) {
@@ -113,6 +115,9 @@ export class QuestionCodeBlockComponent implements OnInit {
   }
 
   removeBlock(cod: number) {
+    if (this.isResponse)
+      return;
+
     let cont = 0;
     for (let block of this.blocksResponse) {
       if (block.cod == cod) {
@@ -122,6 +127,27 @@ export class QuestionCodeBlockComponent implements OnInit {
 
       cont++;
     }
+  }
+
+  markQuestion() {
+    if (!this.isCorrect) {
+      this.blocksResponse = []
+      for (let block of this.data.codeBlocksCorrect) {
+        this.blocksResponse.push({
+          code: "",
+          value: block
+        });
+      }
+    }
+  }
+
+  getClassResponse() {
+    if( this.isResponse && !this.isCorrect)
+      return 'btn btn-danger';
+    else if (this.isResponse && this.isCorrect)
+      return 'btn btn-success';
+    else
+      return 'btn btn-secondary'
   }
 
 }

@@ -21,7 +21,7 @@ export class QuestionOptionsComponent implements OnInit{
   optionsSelected: number = 0;
   options: any[] = [];
   isResponse: boolean = false;
-  nameButton: string = "Correguir!";
+  nameButton: string = "Corregir!";
 
   constructor() {
     this.responseQuestionEvent = new EventEmitter();

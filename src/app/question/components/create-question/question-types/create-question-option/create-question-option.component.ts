@@ -107,7 +107,7 @@ export class CreateQuestionOptionComponent implements OnInit {
     const questionForm = this.genericQuestion.questionForm;
     const optionsForm = this.optionsForm;
 
-    if (questionForm.invalid || optionsForm.invalid) {
+    if (questionForm.invalid || this.checkOptionsForm(optionsForm)) {
       return;
     }
 
@@ -134,6 +134,13 @@ export class CreateQuestionOptionComponent implements OnInit {
     };
 
     this.newQuestionEvent.emit(newQuestion);
+  }
+
+  checkOptionsForm(optionsForm) {
+    for (let option of optionsForm) {
+      if (option.invalid)
+        return true
+    }
   }
 
   getNgClass(option) {

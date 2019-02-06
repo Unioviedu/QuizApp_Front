@@ -19,7 +19,7 @@
         <h6 class="card-title">Respuesta</h6>
         <div class="row">
           <div class="response" *ngFor="let block of blocksResponse; let i = index">
-            <button type="button" class="btn btn-secondary" (click)="removeBlock(block.cod)">{{block.value}}</button>
+            <button type="button" [class]="getClassResponse()" (click)="removeBlock(block.cod)">{{block.value}}</button>
           </div>
         </div>
 

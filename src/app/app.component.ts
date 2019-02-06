@@ -4,9 +4,6 @@ import { Subscription } from 'rxjs';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Router, NavigationStart } from '@angular/router';
 
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,8 +19,8 @@ export class AppComponent {
 
   alertException: boolean;
 
-  private serverUrl = 'http://localhost:8080/socket'
-  private stompClient;
+  //private serverUrl = 'http://localhost:8080/socket'
+  //private stompClient;
 
   constructor(private exceptionService: ExceptionService, private spinnerService: Ng4LoadingSpinnerService,
     private router: Router) {
