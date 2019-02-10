@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AddExamService } from '../../../services/AddExamService';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { GameRoomService } from '../../../services/GameRoomService';
+import {IMyDpOptions} from 'mydatepicker';
 
 import * as moment from 'moment';
 
@@ -12,6 +13,17 @@ import * as moment from 'moment';
   styleUrls: ['./add-exam.component.css']
 })
 export class AddExamComponent implements OnInit {
+  myDatePickerOptions: IMyDpOptions = {
+    dateFormat: 'dd/mm/yyyy',
+    dayLabels: {
+      su: 'Dom', mo: 'Lun', tu: 'Mar', we: 'Mie', th: 'Jue', fr: 'Vie', sa: 'Sab'
+    },
+    monthLabels:{ 
+      1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic' 
+    },
+    todayBtnTxt: 'Hoy'
+  };
+
   idRoom: any;
   questions = [];
   examForm: FormGroup;
